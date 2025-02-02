@@ -1,0 +1,230 @@
+
+/* 
+  Estilos generales para el cuerpo de la página.
+  - Fuente predeterminada: Arial.
+  - Color de fondo: gris claro (#f8f9fa).
+  - Sin márgenes ni relleno.
+*/
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+  Estilos para los títulos h2.
+  - Color: azul claro (#0d98ba).
+  - Texto en negrita.
+*/
+h2 {
+  color: #0d98ba;
+  font-weight: bold;
+}
+
+/* 
+  Barra de navegación:
+  - Color de fondo: azul claro (#0d98ba).
+*/
+.navbar {
+  background-color: #0d98ba;
+}
+
+/* 
+  Estilos para el nombre de la marca en la barra de navegación.
+  - Texto en negrita.
+  - Tamaño de fuente: 1.5rem.
+*/
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* 
+  Estilos para los enlaces de la barra de navegación.
+  - Color del texto: blanco.
+*/
+.nav-link {
+  color: white !important;
+}
+
+/* 
+  Carrusel:
+  - Imágenes con altura fija de 400px.
+  - Ajuste de la imagen para cubrir el espacio sin distorsión.
+*/
+.carousel-inner img {
+  height: 400px;
+  object-fit: cover;
+}
+
+/* 
+  Estilos para el texto superpuesto en el carrusel.
+  - Fondo semitransparente (negro con 50% de opacidad).
+  - Relleno interno: 10px.
+  - Bordes redondeados: 8px.
+*/
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* 
+  Contenedor principal:
+  - Ancho máximo: 1200px.
+  - Centrado en la página.
+*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 
+  Estilos para las tarjetas de servicios:
+  - Sin bordes.
+  - Bordes redondeados: 12px.
+  - Sombra suave.
+  - Transición suave al hacer hover.
+*/
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 
+  Efecto hover para las tarjetas:
+  - Elevación de 5px.
+  - Sombra más pronunciada.
+*/
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* 
+  Estilos para la imagen superior de las tarjetas:
+  - Altura fija: 200px.
+  - Ajuste de la imagen para cubrir el espacio sin distorsión.
+  - Bordes redondeados en la parte superior.
+*/
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* 
+  Estilos para el título de las tarjetas:
+  - Color: azul claro (#0d98ba).
+  - Texto en negrita.
+*/
+.card-title {
+  color: #0d98ba;
+  font-weight: bold;
+}
+
+/* 
+  Estilos para el texto de las tarjetas:
+  - Color: gris oscuro (#555).
+*/
+.card-text {
+  color: #555;
+}
+
+/* 
+  Estilos para los botones:
+  - Color de fondo: azul claro (#0d98ba).
+  - Color del texto: blanco.
+  - Texto en negrita.
+  - Bordes redondeados: 10px.
+  - Relleno interno: 10px arriba/abajo, 20px izquierda/derecha.
+  - Transición suave al hacer hover.
+*/
+.btn {
+  background-color: #0d98ba;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+  border-color: #0d98ba;
+}
+
+/* 
+  Efecto hover para los botones:
+  - Color de fondo más oscuro (#006983).
+  - Borde más oscuro (#006983).
+*/
+.btn:hover {
+  background-color: #006983;
+  border-color: #006983;
+}
+
+/* 
+  Estilos responsivos para pantallas con un ancho máximo de 768px:
+  - Altura de las imágenes del carrusel reducida a 300px.
+*/
+@media (max-width: 768px) {
+  .carousel-inner img {
+    height: 300px;
+  }
+}
+
+/* Aumentando la especificidad de los selectores */
+.navbar-nav .nav-item .dropdown-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 15px;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #006983;
+}
+
+.navbar-nav .nav-item .dropdown-menu .dropdown-item i {
+  font-size: 1.2rem;
+  color: #006983;
+  transition: color 0.3s ease;
+}
+/* Estilos para el botón "Cuenta" */
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  padding: 10px 20px;
+  background-color: #0d98ba;  /* Fondo azul intenso */
+  color: #ffffff;  /* Texto blanco */
+  border-radius: 30px;  /* Bordes redondeados */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto hover para el botón "Cuenta" */
+.nav-link.dropdown-toggle:hover {
+  background-color: #006983;  /* Fondo más oscuro al pasar el cursor */
+  color: #ffffff;  /* Mantener el texto blanco */
+  transform: scale(1.05);  /* Efecto de agrandamiento al pasar el cursor */
+}
+
+/* Estilos para el ícono del botón "Cuenta" */
+.nav-link.dropdown-toggle i {
+  font-size: 1.5rem;  /* Aumentamos el tamaño del ícono */
+  transition: transform 0.3s ease;  /* Animación suave para el ícono */
+}
+
+/* Efecto hover para el ícono */
+.nav-link.dropdown-toggle:hover i {
+  transform: rotate(15deg);  /* Efecto de rotación al pasar el cursor */
+}
+

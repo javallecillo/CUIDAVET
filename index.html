@@ -1,116 +1,501 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
+<!--
+  Definición del documento como HTML5 y especificación del idioma (español).
+-->
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="public\css\bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CUIDAVET</title>
+  <link href="public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="public/css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-    <!-- Comienza la barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark  sticky-top" style="background-color: #0d6efd;">
-        <div class="container-fluid">
-            <!-- Título o marca de la barra de navegación -->
-            <a class="navbar-brand text-white d-flex align-items-center" href="#">
-                <!-- Imagen del logotipo (huella de perro) -->
-                <img
-                  src="public/img/amor.png"  
-                  alt="Logo de huella con perro"
-                  width="30"  
-                  height="30"  
-                  class="me-2"  
-                />
-                Navbar
-              </a>
+  <!--
+    Barra de navegación:
+    - Fija en la parte superior (sticky-top).
+    - Color de fondo personalizado (#0d98ba).
+    - Logo y nombre de la veterinaria.
+    - Menú desplegable para dispositivos móviles.
+  -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #0d98ba;">
+    <div class="container-fluid">
+      <!-- Logo de la veterinaria -->
+      <img src="public\img\Logo\Logo.png" alt="Logo de huella con perro" width="30" height="30" class="me-2" />
+      <!-- Nombre de la veterinaria -->
+      <a class="navbar-brand text-white" href="#">CUIDAVET</a>
+      <!-- Botón para colapsar el menú en dispositivos móviles -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Menú de navegación -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link text-white" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#medicos">Médicos</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#venta">Venta de Mascotas</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#blog">Blog</a></li>
+        </ul>
 
-            <!-- Botón para mostrar/ocultar la barra de navegación en dispositivos pequeños -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <!-- Botón desplegable para Iniciar Sesión y Registrarse -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <!-- Botón desplegable -->
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i> Cuenta
+            </a>
+            <!-- Opciones del menú desplegable -->
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item login" href="login.html"><i class="bi bi-box-arrow-in-right"></i> Iniciar
+                  Sesión</a></li>
+              <li><a class="dropdown-item register" href="register.html"><i class="bi bi-person-plus"></i>
+                  Registrarse</a></li>
+            </ul>
+          </li>
+        </ul>
 
-            <!-- Contenedor para los enlaces de navegación -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Lista de enlaces principales de la barra de navegación -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- Enlace a "Inicio" -->
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
-                    </li>
-                    <!-- Enlace a "Enlace" -->
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Enlace</a>
-                    </li>
-                    <!-- Menú desplegable -->
-                    <li class="nav-item dropdown">
-                        <!-- Título del menú desplegable -->
-                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Desplegable
-                        </a>
-                        <!-- Opciones dentro del menú desplegable -->
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Acción</a></li>
-                            <li><a class="dropdown-item" href="#">Otra acción</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
-                        </ul>
-                    </li>
-                    <!-- Enlace deshabilitado -->
-                    <li class="nav-item">
-                        <a class="nav-link disabled text-white" aria-disabled="true">Deshabilitado</a>
-                    </li>
-                </ul>
+      </div>
+    </div>
+  </nav>
 
-                <!-- Barra de búsqueda -->
-                <form class="d-flex" role="search">
-                    <!-- Campo de texto para la búsqueda -->
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-                    <!-- Botón para enviar la búsqueda -->
-                    <button class="btn btn-success" type="submit">Buscar</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-    <!-- Termina la barra de navegación -->
-
-     <!-- contenido de la página -->
-     <section class="container-fluid p-0 position-relative" style="margin-top: -4rem; padding-top: 4rem;">
-        <div id="carrusel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="public\img\pexels-mikhail-nilov-7469213.jpg" alt="Descripción de la imagen" class="img-fluid w-100" style="filter: blur(5px);">
-            </div>
-            <div class="carousel-item">
-              <img src="public\img\pexels-ifaw-5486962.jpg" alt="Descripción de la imagen" class="img-fluid w-100" style="filter: blur(5px);">
-            </div>
-            <div class="carousel-item">
-              <img src="public/img/pexels-mikhail-nilov-7469224.jpg" alt="Descripción de la imagen" class="img-fluid w-100" style="filter: blur(5px);">
-            </div>
-            <div class="carousel-item">
-              <img src="public\img\pexels-n-voitkevich-4445621.jpg" alt="Descripción de la imagen" class="img-fluid w-100" style="filter: blur(5px);">
-            </div>
-            <div class="carousel-item">
-              <img src="public\img\pexels-tima-miroshnichenko-6131096.jpg" alt="Descripción de la imagen" class="img-fluid w-100" style="filter: blur(5px);">
-            </div>
-          </div>
+  <!--
+    Carrusel de imágenes:
+    - Muestra imágenes con texto descriptivo.
+    - Cambia automáticamente cada 3 segundos.
+    - Controles para navegar manualmente.
+  -->
+  <section class="container-fluid p-0 position-relative">
+    <div id="carrusel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <!-- Contenedor de las imágenes del carrusel -->
+      <div class="carousel-inner">
+        <!-- Primera imagen (activa por defecto) -->
+        <div class="carousel-item active">
+          <img src="public\img\Presentacion\1.jpg" alt="Atención veterinaria" class="d-block w-100">
           <div class="carousel-caption d-none d-md-block">
-            <h5>Texto que se mantiene visible</h5>
-            <p>Este texto se mantiene visible aunque las imágenes cambien.</p>
+            <h5>Bienvenido a Veterinaria CUIDAVET</h5>
+            <p>Donde cuidamos de tus compañeros peludos como si fueran nuestros.</p>
           </div>
-      
         </div>
-      </section>
-    <!-- Termina el contenido de la página -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        <!-- Segunda imagen -->
+        <div class="carousel-item">
+          <img src="public\img\Presentacion\2.jpg" alt="Gato y perro felices" class="d-block w-100">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Cuidados Especiales</h5>
+            <p>Brindamos el amor y cuidado que tus mascotas merecen.</p>
+          </div>
+        </div>
+        <!-- Tercera imagen -->
+        <div class="carousel-item">
+          <img src="public\img\Presentacion\3.jpg" alt="Familia con mascota" class="d-block w-100">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Un miembro más de la familia</h5>
+            <p>Nos preocupamos por la salud y felicidad de tus amigos peludos.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Controles para navegar manualmente -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </section>
+
+  <!--
+    Sección de Servicios:
+    - Muestra tarjetas con información de cada servicio.
+    - Cada tarjeta tiene un botón para agendar citas o visitar la tienda.
+  -->
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Nuestros Servicios</h2>
+    <div class="row">
+      <!-- Servicio 1: Consultas Médicas -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\2.jpg" class="card-img-top" alt="Consultas Médicas">
+          <div class="card-body">
+            <h5 class="card-title">Consultas Médicas</h5>
+            <p class="card-text">Ofrecemos consultas médicas generales y especializadas para garantizar la salud de tu
+              mascota.</p>
+            <a href="agendar_cita.html" class="btn btn-primary">
+              <i class="bi bi-calendar-check"></i> Agendar Cita
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicio 2: Vacunación -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\3.jpg" class="card-img-top" alt="Vacunación">
+          <div class="card-body">
+            <h5 class="card-title">Vacunación</h5>
+            <p class="card-text">Mantenemos a tu mascota protegida con un esquema completo de vacunación.</p>
+            <a href="agendar_cita.html" class="btn btn-primary">
+              <i class="bi bi-eyedropper"></i> Agendar Cita
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicio 3: Cirugías -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\4.jpg" class="card-img-top" alt="Cirugías">
+          <div class="card-body">
+            <h5 class="card-title">Cirugías</h5>
+            <p class="card-text">Realizamos cirugías con equipos de última generación y un equipo altamente capacitado.
+            </p>
+            <a href="agendar_cita.html" class="btn btn-primary">
+              <i class="bi bi-scissors"></i> Agendar Cita
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicio 4: Peluquería y Estética -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\1.jpg" class="card-img-top" alt="Peluquería y Estética">
+          <div class="card-body">
+            <h5 class="card-title">Peluquería y Estética</h5>
+            <p class="card-text">Mantén a tu mascota siempre hermosa con nuestros servicios de peluquería y estética.
+            </p>
+            <a href="agendar_cita.html" class="btn btn-primary">
+              <i class="bi bi-scissors"></i> Agendar Cita
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicio 5: Atención de Emergencias -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\5.jpg" class="card-img-top" alt="Atención de Emergencias">
+          <div class="card-body">
+            <h5 class="card-title">Atención de Emergencias</h5>
+            <p class="card-text">Estamos disponibles las 24 horas para atender cualquier emergencia de tu mascota.</p>
+            <!-- Sin botón -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicio 6: Tienda de Mascotas -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="public\img\Servicios\6.jpg" class="card-img-top" alt="Tienda de Mascotas">
+          <div class="card-body">
+            <h5 class="card-title">Tienda de Mascotas</h5>
+            <p class="card-text">Encuentra los mejores productos para el bienestar de tus amigos peludos.</p>
+            <a href="tienda.html" class="btn btn-primary">
+              <i class="bi bi-cart"></i> Visitar Tienda
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Galería de Mascotas (Carrusel):
+    - Muestra imágenes de mascotas con descripciones.
+    - Cambia automáticamente cada 3 segundos.
+    - Controles para navegar manualmente.
+  -->
+  <section class="container my-5">
+    <h2 class="text-center mb-4">Galería de Mascotas</h2>
+    <div id="galeriaMascotas" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <!-- Indicadores del carrusel -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="4"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="5"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="6"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="7"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="8"></button>
+        <button type="button" data-bs-target="#galeriaMascotas" data-bs-slide-to="9"></button>
+      </div>
+
+      <!-- Items del carrusel -->
+      <div class="carousel-inner">
+        <!-- Mascota 1 -->
+        <div class="carousel-item active">
+          <img src="public\img\Galeria\4.jpg" class="d-block w-100" alt="Max">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Max</h5>
+            <p>Perro juguetón y lleno de energía.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 2 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\5.jpg" class="d-block w-100" alt="Luna">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Luna</h5>
+            <p>Gata cariñosa y tranquila.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 3 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\1.jpg" class="d-block w-100" alt="Rocky">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Rocky</h5>
+            <p>Perro fuerte y protector.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 4 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\2.jpg" class="d-block w-100" alt="Bella">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Bella</h5>
+            <p>Siempre lista para abrazos.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 5 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\7.jpg" class="d-block w-100" alt="Toby">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Toby</h5>
+            <p>El explorador del jardín.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 6 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\9.jpg" class="d-block w-100" alt="Milo">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Milo</h5>
+            <p>Siempre curioso y feliz.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 7 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\3.jpg" class="d-block w-100" alt="Daisy">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Daisy</h5>
+            <p>Reina de las siestas.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 8 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\6.jpg" class="d-block w-100" alt="Nala">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Nala</h5>
+            <p>Siempre lista para jugar.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 9 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\10.jpg" class="d-block w-100" alt="Charlie">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Charlie</h5>
+            <p>Gran compañero de aventuras.</p>
+          </div>
+        </div>
+
+        <!-- Mascota 10 -->
+        <div class="carousel-item">
+          <img src="public\img\Galeria\8.jpg" class="d-block w-100" alt="Simba">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Simba</h5>
+            <p>El rey de la casa.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles del carrusel -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#galeriaMascotas" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#galeriaMascotas" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </section>
+
+  <!--
+    Sección del Blog:
+    - Muestra artículos con consejos para el cuidado de mascotas.
+    - Cada artículo tiene un botón para leer más.
+  -->
+  <div class="container my-5">
+    <h2 class="text-center">Consejos para el Cuidado de tus Mascotas</h2>
+    <div class="row mt-4">
+      <!-- Artículo 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\Consejos\3.jpg" class="card-img-top" alt="Cuidados básicos para perros">
+          <div class="card-body">
+            <h5 class="card-title">Cuidados básicos para perros</h5>
+            <p class="card-text">Aprende cómo mantener saludable a tu perro con estos consejos esenciales.</p>
+            <a href="blog_articulo1.html" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artículo 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\Consejos\2.jpg" class="card-img-top" alt="Alimentación saludable para gatos">
+          <div class="card-body">
+            <h5 class="card-title">Alimentación saludable para gatos</h5>
+            <p class="card-text">Descubre qué alimentos son los mejores para tu gato y cuáles evitar.</p>
+            <a href="blog_articulo2.html" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artículo 3 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\Consejos\1.jpg" class="card-img-top" alt="Cómo bañar a tu mascota correctamente">
+          <div class="card-body">
+            <h5 class="card-title">Cómo bañar a tu mascota correctamente</h5>
+            <p class="card-text">Consejos prácticos para hacer del baño una experiencia agradable para tu mascota.</p>
+            <a href="blog_articulo3.html" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    Sección de Equipo Médico:
+    - Muestra información sobre los médicos de la veterinaria.
+  -->
+  <section id="medicos" class="container my-5">
+    <h2 class="text-center">Nuestro Equipo Médico</h2>
+    <div class="row">
+      <!-- Médico 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\EquipoMedico\2.jpg" class="card-img-top" alt="Dr. Juan Pérez">
+          <div class="card-body">
+            <h5 class="card-title">Dr. Juan Pérez</h5>
+            <p class="card-text">Especialista en medicina felina y canina.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Médico 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\EquipoMedico\1.jpg" class="card-img-top" alt="Dra. María López">
+          <div class="card-body">
+            <h5 class="card-title">Dra. María López</h5>
+            <p class="card-text">Cirujana veterinaria con 10 años de experiencia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Sección de Venta de Mascotas:
+    - Muestra mascotas disponibles para la venta.
+  -->
+  <section id="venta" class="container my-5">
+    <h2 class="text-center">Mascotas en Venta</h2>
+    <div class="row">
+      <!-- Mascota 1 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public/img/Venta/1.jpg" class="card-img-top" alt="Cachorro Labrador">
+          <div class="card-body">
+            <h5 class="card-title">Cachorro Labrador</h5>
+            <p class="card-text">Edad: 3 meses - Vacunado y desparasitado.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mascota 2 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public/img/Venta/2.png" class="card-img-top" alt="Gatito Persa">
+          <div class="card-body">
+            <h5 class="card-title">Gatito Persa</h5>
+            <p class="card-text">Edad: 2 meses - Con pedigree.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mascota 3 -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="public\img\Venta\3.jpeg" class="card-img-top" alt="Conejito Mini Lop">
+          <div class="card-body">
+            <h5 class="card-title">Conejito Mini Lop</h5>
+            <p class="card-text">Edad: 1.5 meses - Muy dócil y cariñoso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón para visitar la tienda de mascotas -->
+    <div class="text-center mt-4">
+      <a href="tienda.html" class="btn btn-primary">
+        <i class="bi bi-cart"></i> Visitar Tienda
+      </a>
+    </div>
+  </section>
+
+  <!--
+    Sección del Blog de Cuidados:
+    - Muestra artículos adicionales sobre el cuidado de mascotas.
+  -->
+  <section id="blog" class="container my-5">
+    <h2 class="text-center">Blog de Cuidados</h2>
+    <div class="row">
+      <!-- Artículo 1 -->
+      <div class="col-md-6">
+        <div class="card">
+          <img src="public\img\Cuidados\1.jpg" class="card-img-top" alt="Cuidados de Perros">
+          <div class="card-body">
+            <h5 class="card-title">Cuidados Básicos para Perros</h5>
+            <p class="card-text">Consejos esenciales para la salud y bienestar de tu mascota.</p>
+            <a href="#" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artículo 2 -->
+      <div class="col-md-6">
+        <div class="card">
+          <img src="public\img\Cuidados\2.jpg" class="card-img-top" alt="Cuidados de Gatos">
+          <div class="card-body">
+            <h5 class="card-title">Alimentación Saludable para Gatos</h5>
+            <p class="card-text">Descubre cómo proporcionar una dieta equilibrada.</p>
+            <a href="#" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Scripts:
+    - Bootstrap Bundle para funcionalidades como el carrusel.
+    - Script personalizado (script.js).
+  -->  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="public/js/script.js"></script>
 </body>
 
 </html>
