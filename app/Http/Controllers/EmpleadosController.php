@@ -39,7 +39,7 @@ class EmpleadosController extends Controller
             'turno' => 'Tarde',
             'salario' => 1000,
             'id_moneda' => 1,
-            'estado' => 1,
+            'estado' => 'Activo',
 
         ]);
     }

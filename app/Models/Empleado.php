@@ -47,6 +47,26 @@ class Empleado extends Authenticatable
         'contrasenia',
     ];
 
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->contrasenia;
+    }
+
+    /**
+     * Get the username for the user.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'correo';
+    }
+
     /*
     // Relación con la tabla roles
     public function rol()

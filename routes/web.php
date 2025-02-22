@@ -1,14 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EmpleadosController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('modulos.usuarios.IngresarEmpleados');
+    //return view('welcome');
 });
 
-Route::get('RegistrarEmpleado', [EmpleadosController::class, 'create']);
+//Route::get('RegistrarEmpleado', [EmpleadosController::class, 'create']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Ruta para el inicio de sesión
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('Inicio', function () {
+    return view('modulos.Inicio');
+});
