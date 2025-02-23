@@ -66,23 +66,4 @@ class Empleado extends Authenticatable
     {
         return 'correo';
     }
-
-    /*
-    // Relación con la tabla roles
-    public function rol()
-    {
-        return $this->belongsTo(Rol::class, 'id_rol');
-    }
-
-    // Relación con la tabla departamentos
-    public function departamento()
-    {
-        return $this->belongsTo(Departamento::class, 'id_departamento');
-    }
-
-    // Relación con la tabla monedas
-    public function moneda()
-    {
-        return $this->belongsTo(Moneda::class, 'id_moneda');
-    }*/
 }

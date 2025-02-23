@@ -16,6 +16,7 @@ Auth::routes();
 // Ruta para el inicio de sesión
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::get('Inicio', function () {
+// Ruta para la página de inicio
+Route::get('/Inicio', function () {
     return view('modulos.Inicio');
-});
+})->name('Inicio');
