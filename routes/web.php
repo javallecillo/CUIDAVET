@@ -1,20 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EmpleadosController;
 
 Route::get('/', function () {
-    return view('modulos.usuarios.IngresarEmpleados');
-    //return view('welcome');
+    if (Auth::check()) {
+        return redirect()->route('Inicio');
+    } else {
+        return redirect()->route('loginempleados');
+    }
 });
 
 //Route::get('RegistrarEmpleado', [EmpleadosController::class, 'create']);
 
-Auth::routes();
+Auth::routes(['login' => false]); // Deshabilitar la ruta de login predeterminada
 
 // Ruta para el inicio de sesión
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/loginempleados', [LoginController::class, 'showLoginForm'])->name('loginempleados');
+Route::post('/loginempleados', [LoginController::class, 'login'])->name('loginempleados');
 
 // Ruta para la página de inicio
 Route::get('/Inicio', function () {

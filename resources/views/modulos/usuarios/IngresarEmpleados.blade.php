@@ -10,7 +10,7 @@
     <!-- Título del formulario -->
     <p class="login-box-msg" style="color: #0d98ba; font-weight: bold; margin-bottom: 1.5rem; font-size: 30px">Iniciar Sesión</p>
     <!-- Formulario de inicio de sesión -->
-    <form action="{{ route('login')}}" method="post">
+    <form action="{{ route('loginempleados')}}" method="post">
         @csrf
       <!-- Campo de correo electrónico -->
       <div class="form-group has-feedback">
@@ -21,11 +21,12 @@
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="Contraseña" name="contrasenia" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
 
         @error('correo')
-            <div class="alert alert-danger">Error con el correo o la contraseña.</div>
+            <div class="alert alert-danger"><b>Error con el correo o la contraseña.</b></div>
         @enderror
-      </div>
+
       <!-- Botón de inicio de sesión -->
       <div class="row">
         <div class="col-xs-12">

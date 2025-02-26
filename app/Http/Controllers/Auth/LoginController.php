@@ -11,6 +11,11 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+    public function showLoginForm()
+    {
+        return view('modulos.usuarios.IngresarEmpleados'); // Asegúrate de que esta vista exista
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -25,12 +30,6 @@ class LoginController extends Controller
         return back()->withErrors(['correo' => 'Las credenciales proporcionadas no coinciden con nuestros registros.']);
     }
 
-    /**
-     * Get the needed authorization credentials from the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     protected function credentials(Request $request)
     {
         return [
