@@ -20,7 +20,7 @@ class LoginController extends Controller
     {
         $request->validate([
             'correo' => 'required|email',
-            'contrasenia' => 'required',
+            'contrasenia' => 'required'
         ]);
 
         if (Auth::attempt($this->credentials($request))) {
