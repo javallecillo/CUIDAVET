@@ -1,15 +1,21 @@
 @extends('welcome')
 
 @section('contenido')
-    <section class="content-header">
-        <h1>Cajas</h1>
-    </section>
-    <section class="content">
-        <div class="box">
-            <div class="box-body">
-                <!-- Contenido de la página de Cajas -->
-                <p>Bienvenido a la página de Cajas.</p>
+
+    <div class="content-wrapper">
+
+        <section class="content-header">
+            <h1>Inicio</h1>
+        </section>
+        <section class="content">
+            <div class="box">
+                <div class="box-body">
+                    <!-- Contenido de la página de Cajas -->
+                    <p>Bienvenido a la página Cajas.</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
+    
 @endsection

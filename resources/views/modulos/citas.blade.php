@@ -11,7 +11,7 @@
             <div class="box">
                 <div class="box-body">
                     <!-- Contenido de la página de inicio -->
-                    <p>Bienvenido a la página Clientes .</p>
+                    <p>Bienvenido a la página Citas.</p>
                 </div>
             </div>
         </section>
