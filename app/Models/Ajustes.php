@@ -10,12 +10,6 @@ class Ajustes extends Model
     use HasFactory;
     protected $table = 'ajustes';
 
-    protected $fillable = [
-        'telefono',
-        'direccion',
-        'id_moneda',
-        'zona_horaria',
-        'logo',
-    ];
+    
 
 }

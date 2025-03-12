@@ -1,0 +1,43 @@
+/* filepath: /c:/laragon/www/cuidavet/public/css/inicio.css */
+.inicio-container .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inicio-container .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.inicio-container .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.inicio-container .card-title {
+    color: #0d98ba;
+    font-weight: bold;
+}
+
+.inicio-container .card-text {
+    color: #555;
+}
+
+.inicio-container .btn {
+    background-color: #0d98ba;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    border-color: #0d98ba;
+}
+
+.inicio-container .btn:hover {
+    background-color: #006983;
+    border-color: #006983;
+}

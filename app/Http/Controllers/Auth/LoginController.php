@@ -13,14 +13,14 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('modulos.usuarios.IngresarEmpleados'); // Asegúrate de que esta vista exista
+        return view('modulos.users.ingresar'); // Asegúrate de que esta vista exista
     }
 
     public function login(Request $request)
     {
         $request->validate([
             'correo' => 'required|email',
-            'contrasenia' => 'required'
+            'contrasenia' => 'required',
         ]);
 
         if (Auth::attempt($this->credentials($request))) {

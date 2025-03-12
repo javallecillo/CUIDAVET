@@ -1,5 +1,5 @@
 <!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
+<aside class="main-sidebar fixed-menu">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -16,16 +16,16 @@
                     <i class="fa fa-users"></i> <span>Clientes</span>
                 </a>
             </li>
+            <!-- Menu item: Empleados -->
+            <li>
+                <a href="{{ url('Empleados') }}">
+                    <i class="fa fa-id-badge"></i> <span>Empleados</span>
+                </a>
+            </li>
             <!-- Menu item: Mascotas -->
             <li>
                 <a href="{{ url('Mascotas') }}">
                     <i class="fa fa-paw"></i> <span>Mascotas</span>
-                </a>
-            </li>
-            <!-- Menu item: Usuarios -->
-            <li>
-                <a href="{{ url('Usuarios') }}">
-                    <i class="fa fa-user"></i> <span>Usuarios</span>
                 </a>
             </li>
             <!-- Menu item: Clinica with sub-menu -->
@@ -75,6 +75,12 @@
                         <i class="fa fa-archive"></i> Inventario</a></li>
                 </ul>
             </li>
+            <!-- Menu item: Pproveedores -->
+            <li>
+                <a href="{{ url('Proveedores') }}">
+                    <i class="fa fa-user"></i> <span>Proveedores</span>
+                </a>
+            </li>
             <!-- Menu item: Compras -->
             <li><a href="{{ url('Compras') }}">
                 <i class="fa fa-shopping-cart"></i> <span>Compras</span></a></li>
@@ -85,10 +91,13 @@
             <li><a href="{{ url('Informes') }}">
                 <i class="fa fa-bar-chart"></i> <span>Informes</span></a></li>
             <!-- Horizontal line separator -->
-            <hr>
-           <!-- Menu item: Ajustes -->
-            <li><a href="{{ route('ajustes.index') }}">
-                <i class="fa fa-cogs"></i> <span>Ajustes</span></a></li>
+            @if(auth()->user()->id_rol == 1)
+                <hr>
+            <!-- Menu item: Ajustes -->
+                <li><a href="{{ route('ajustes.index') }}">
+                    <i class="fa fa-cogs"></i> <span>Ajustes</span></a>
+                </li>
+            @endif
         </ul>
     </section>
     <!-- /.sidebar -->

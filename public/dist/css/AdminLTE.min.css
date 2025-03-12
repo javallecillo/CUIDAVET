@@ -290,8 +290,10 @@ a:hover,a:active,a:focus {
 
 @media (max-width: 991px) {
     .main-header .navbar-custom-menu a,.main-header .navbar-right a {
-        color:inherit;
-        background: transparent
+        background-color: #3c8dbc;
+        border-color: #3c8dbc;
+        color: #fff;
+        font-size: 14px;
     }
 }
 
@@ -1290,8 +1292,8 @@ a:hover,a:active,a:focus {
 }
 
 .navbar-nav>.user-menu>.dropdown-menu>.user-footer {
-    background-color: #f9f9f9;
-    padding: 10px
+    background-color: #ecf0f5;
+    padding: 0;
 }
 
 .navbar-nav>.user-menu>.dropdown-menu>.user-footer:before,.navbar-nav>.user-menu>.dropdown-menu>.user-footer:after {
@@ -1430,7 +1432,7 @@ a:hover,a:active,a:focus {
 .form-control {
     border-radius: 10px;
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
     box-shadow: none;
     border-color: #d2d6de
 }
@@ -2546,11 +2548,12 @@ a:hover,a:active,a:focus {
 }
 
 .btn.btn-flat {
-    border-radius: 8px;
+    border-radius: 010px;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    border-width: 1px
+    border-width: 02px;
+    width: 100%;
 }
 
 .btn:active {
