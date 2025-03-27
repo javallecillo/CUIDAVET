@@ -7,26 +7,50 @@
     <section class="content table-responsive">
         <div class="box">
             <div class="box-body table-responsive">
-                
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                
+                <!-- Navbar -->
+                <ul class="nav nav-tabs">
+                    <li class="{{ request()->is('ajustes') ? 'active' : '' }}">
+                        <a href="{{ route('ajustes.index') }}">Ajustes</a>
+                    </li>
+                    <li class="{{ request()->is('roles') ? 'active' : '' }}">
+                        <a href="{{ route('roles.index') }}">Roles</a>
+                    </li>
+                    <li class="{{ request()->is('monedas') ? 'active' : '' }}">
+                        <a href="{{ route('monedas.index') }}">Monedas</a>
+                    </li>
+                    <li class="{{ request()->is('departamentos') ? 'active' : '' }}">
+                        <a href="{{ route('departamentos.index') }}">Departamentos</a>
+                    </li>
+                    <li class="{{ request()->is('nacionalidades') ? 'active' : '' }}">
+                        <a href="{{ route('nacionalidades.index') }}">Nacionalidades</a>
+                    </li>
+                    <li class="{{ request()->is('servicios') ? 'active' : '' }}">
+                        <a href="{{ route('servicios.index') }}">Servicios</a>
+                    </li>
+                </ul>
+                <br>
+                <!-- Contenido dinámico -->
+                @if(request()->is('ajustes'))
+                    <!-- Sección de ajustes -->
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     @if(isset($ajustes))
                         <form action="{{ route('ajustes.update', $ajustes->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-center">
                                     <h2>Foto</h2>
                                     <input type="file" class="form-control" name="logo">
+                                    <br>
                                     @if($ajustes->logo)
                                         <img src="{{ asset('storage/' . $ajustes->logo) }}" width="150px" alt="Imagen actual">
                                     @else
@@ -34,18 +58,15 @@
                                     @endif
                                 </div>
 
+                                
                                 <div class="col-md-3">
-                                    <h2>Telefono</h2>
+                                    <h2>Teléfono</h2>
                                     <input type="text" class="form-control" name="telefono" required
                                     data-inputmask="'mask': '+(999) 9999-9999'" data-mask value="{{$ajustes->telefono}}">
-                                </div>
-
-                                <div class="col-md-3">
-                                    <h2>Direccion</h2>
-                                    <input type="text" class="form-control" name="direccion" required value="{{$ajustes->direccion}}">
-                                </div>
-
-                                <div class="col-md-3">
+                               </div> 
+                               
+                               <!-- 
+                               <div class="col-md-3">
                                     <h2>Moneda</h2>
                                     <select class="form-control" name="id_moneda" required>
                                         @foreach($monedas as $moneda)
@@ -54,9 +75,14 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>-->
                             
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <h2>RTN</h2>
+                                    <input type="text" class="form-control" name="rtn" required value="{{ $ajustes->rtn }}">
+                                </div>
+
+                                <div class="col-md-3">
                                     <h2>Zona Horaria</h2>
                                     <select class="form-control" name="zona_horaria" required>
                                         <option value="UTC-06:00" {{$ajustes->zona_horaria == 'UTC-06:00' ? 'selected' : ''}}>UTC-06:00 - Central America</option>
@@ -68,6 +94,13 @@
                                     </select>
                                 </div>
 
+                                <div class="col-md-9">
+                                    <h2>Dirección</h2>
+                                    <textarea name="direccion" type="text" class="form-control">{{$ajustes->direccion}}</textarea>
+                                </div>
+
+                            
+                                    
                                 <div class="col-md-12 text-right">
                                     <br>
                                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -79,8 +112,55 @@
                             No se encontraron ajustes.
                         </div>
                     @endif
-                <hr>
-                    <!-- Sección para Monedas -->
+                @elseif(request()->is('roles'))
+                    <!-- Sección de roles -->
+                    <div class="section">
+                        <h2>Roles</h2>
+                        <form action="{{ route('roles.store') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del rol" required>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Agregar Rol</button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <table class="table table-bordered table-striped mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($roles) && count($roles) > 0)
+                                    @foreach($roles as $rol)
+                                        <tr>
+                                            <td>{{ $rol->nombre }}</td>
+                                            <td>
+                                                <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                </form>
+                                                <a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="2">No se encontraron roles.</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                @elseif(request()->is('monedas'))
+                    <!-- Sección de monedas -->
                     <div class="section">
                         <h2>Monedas</h2>
                         <form action="{{ route('monedas.store') }}" method="POST">
@@ -128,60 +208,11 @@
                                         <td colspan="3">No se encontraron monedas.</td>
                                     </tr>
                                 @endif
-                                
                             </tbody>
                         </table>
                     </div>
-                <hr>
-                    <!-- Sección para Roles -->
-                    <div class="section">
-                        <h2>Roles</h2>
-                        <form action="{{ route('roles.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del rol" required>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Agregar Rol</button>
-                                </div>
-                            </div>
-                        </form>
-                        <br>
-                        <table class="table table-bordered table-striped mt-3">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(isset($roles) && count($roles) > 0)
-                                    @foreach($roles as $rol)
-                                        <tr>
-                                            <td>{{ $rol->nombre }}</td>
-                                            <td>
-                                                <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                </form>
-                                                <a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="2">No se encontraron roles.</td>
-                                    </tr>
-                                @endif
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                <hr>
-                    <!-- Sección para Departamentos -->
+                @elseif(request()->is('departamentos'))
+                    <!-- Sección de departamentos -->
                     <div class="section">
                         <h2>Departamentos</h2>
                         <form action="{{ route('departamentos.store') }}" method="POST">
@@ -224,13 +255,11 @@
                                         <td colspan="2">No se encontraron departamentos.</td>
                                     </tr>
                                 @endif
-                                
                             </tbody>
                         </table>
                     </div>
-
-                    <hr>
-                    <!-- Sección para Nacionalidades -->
+                @elseif(request()->is('nacionalidades'))
+                    <!-- Sección de nacionalidades -->
                     <div class="section">
                         <h2>Nacionalidades</h2>
                         <form action="{{ route('nacionalidades.store') }}" method="POST">
@@ -276,8 +305,8 @@
                             </tbody>
                         </table>
                     </div>
-                <hr>
-                    <!-- Sección para Servicios -->
+                @elseif(request()->is('servicios'))
+                    <!-- Sección de servicios -->
                     <div class="section">
                         <h2>Servicios</h2>
                         <form action="{{ route('servicios.store') }}" method="POST">
@@ -323,6 +352,7 @@
                             </tbody>
                         </table>
                     </div>
+                @endif
             </div>
         </div>
     </section>

@@ -50,9 +50,9 @@ Route::put('/Mascotas/{id}', [MascotasController::class, 'update'])->name('masco
 Route::delete('/Mascotas/{id}', [MascotasController::class, 'destroy'])->name('mascotas.destroy');
 Route::get('/Mascotas/buscar-cliente', [MascotasController::class, 'buscarCliente'])->name('mascotas.buscarCliente');
 
-Route::get('/Veterinarios', function () {
-    return view('modulos.veterinarios');
-})->name('Veterinarios');
+use App\Http\Controllers\VeterinarioController;
+
+Route::get('/Veterinarios', [VeterinarioController::class, 'index'])->name('Veterinarios');
 
 Route::get('/Citas', function () {
     return view('modulos.citas');
@@ -78,13 +78,13 @@ Route::get('/Categorias/{id}/edit', [CategoriasController::class, 'edit'])->name
 Route::put('/Categorias/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
 Route::delete('/Categorias/{id}', [CategoriasController::class, 'destroy'])->name('categorias.destroy');
 
-Route::get('/GestorProductos', function () {
-    return view('modulos.gestor_productos');
-})->name('GestorProductos');
+use App\Http\Controllers\ProductoController;
 
-Route::get('/Inventario', function () {
-    return view('modulos.inventario');
-})->name('Inventario');
+Route::get('/GestorProductos', [ProductoController::class, 'index'])->name('productos.index');
+
+use App\Http\Controllers\InventarioController;
+
+Route::get('/Inventario', [InventarioController::class, 'index'])->name('inventario.index');
 
 Route::get('/Compras', function () {
     return view('modulos.compras');
@@ -118,6 +118,7 @@ Route::get('/Inicio', function () {
 Route::resource('nacionalidades', NacionalidadesController::class)->only(['store', 'destroy']);
 Route::resource('nacionalidades', NacionalidadesController::class);
 Route::resource('monedas', MonedaController::class);
+Route::get('/monedas', [App\Http\Controllers\MonedaController::class, 'index'])->name('monedas.index');
 Route::resource('roles', 'App\Http\Controllers\RolController');
 Route::resource('departamentos', DepartamentoController::class);
 Route::resource('empleados', EmpleadosController::class);
@@ -130,3 +131,7 @@ Route::get('/Proveedores', [ProveedoresController::class, 'index'])->name('prove
 use App\Http\Controllers\ServicioController;
 
 Route::resource('servicios', ServicioController::class);
+
+Route::resource('productos', ProductoController::class);
+
+Route::resource('veterinarios', VeterinarioController::class);

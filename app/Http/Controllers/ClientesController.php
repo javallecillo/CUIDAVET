@@ -42,6 +42,7 @@ class ClientesController extends Controller
         ]);
 
         Cliente::create($validatedData);
+        //Cliente::create($request->all());
         return redirect()->route('Clientes')->with('success', 'Cliente creado correctamente.');
     }
 

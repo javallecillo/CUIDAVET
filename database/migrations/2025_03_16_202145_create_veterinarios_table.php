@@ -11,21 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('veterinarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('genero');
-            $table->string('dni')->unique();
-            $table->string('contrasenia');
             $table->string('telefono');
-            $table->string('tel_alternativo')->nullable();
             $table->string('correo')->unique();
-            $table->string('direccion');
-            $table->unsignedBigInteger('id_nacionalidad');
-            $table->unsignedBigInteger('id_moneda');
-            $table->unsignedBigInteger('id_rol')->default(3);
-            $table->string('estado');
+            $table->string('especialidad');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -35,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('veterinarios');
     }
 };

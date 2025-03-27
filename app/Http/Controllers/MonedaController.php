@@ -41,4 +41,10 @@ class MonedaController extends Controller
 
         return redirect()->route('ajustes.index')->with('success', 'Moneda eliminada correctamente.');
     }
+
+    public function index()
+    {
+        $monedas = Moneda::all(); // Obtener todas las monedas
+        return view('modulos.ajustes', compact('monedas')); // Pasar las monedas a la vista
+    }
 }

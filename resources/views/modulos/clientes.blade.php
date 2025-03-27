@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($clientes as $cliente)
+                        @foreach($clientes as $cliente)
                             <tr>
                                 <td>{{ $cliente->dni }}</td>
                                 <td>{{ $cliente->nombre }}</td>
@@ -40,11 +40,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">No hay clientes registrados</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
