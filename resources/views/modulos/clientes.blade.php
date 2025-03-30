@@ -6,6 +6,11 @@
         <div class="text-right">
             <a href="{{ route('clientes.create') }}" class="btn btn-primary">Agregar Cliente</a>
         </div>
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
     </section>
     <section class="content table-responsive">
         <div class="box">

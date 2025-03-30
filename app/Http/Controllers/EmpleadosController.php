@@ -68,7 +68,7 @@ class EmpleadosController extends Controller
             'id_rol' => 'required',
             'f_nacimiento' => 'required|date',
             'genero' => 'required',
-            'fecha_contratacion' => 'required|date',
+            'f_contratacion' => 'required|date',
             'id_departamento' => 'required',
             'dias_laborales' => 'required',
             'turno' => 'required',
@@ -77,7 +77,12 @@ class EmpleadosController extends Controller
             'estado' => 'required',
         ]);
 
-        Empleado::create($request->all());
+        $data = $request->all();
+
+        // Encriptar la contraseña antes de guardar
+        $data['contrasenia'] = Hash::make($data['contrasenia']);
+
+        Empleado::create($data);
 
         return redirect()->route('Empleados')->with('success', 'Empleado creado exitosamente.');
     }
@@ -101,7 +106,7 @@ class EmpleadosController extends Controller
             'id_rol' => 'required',
             'f_nacimiento' => 'required|date',
             'genero' => 'required',
-            'fecha_contratacion' => 'required|date',
+            'f_contratacion' => 'required|date',
             'id_departamento' => 'required',
             'dias_laborales' => 'required',
             'turno' => 'required',

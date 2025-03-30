@@ -20,7 +20,7 @@ class ClientesController extends Controller
     {
         $monedas = Moneda::all();
         $nacionalidades = Nacionalidad::all();
-        return view('modulos.create_cliente', compact('monedas'), compact('nacionalidades'));
+        return view('modulos.create_cliente', compact('monedas', 'nacionalidades'));
     }
 
     public function store(Request $request)
@@ -41,9 +41,12 @@ class ClientesController extends Controller
             'estado' => 'required|string|max:255',
         ]);
 
-        Cliente::create($validatedData);
-        //Cliente::create($request->all());
-        return redirect()->route('Clientes')->with('success', 'Cliente creado correctamente.');
+        try {
+            Cliente::create($validatedData);
+            return redirect()->route('Clientes')->with('success', 'Cliente creado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al guardar el cliente: ' . $e->getMessage());
+        }
     }
 
     public function edit($id)

@@ -68,8 +68,8 @@
                         @endif
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fecha_contratacion">Fecha de Contratación</label>
-                        <input type="date" name="fecha_contratacion" class="form-control" value="{{ $empleado->fecha_contratacion }}" required>
+                        <label for="f_contratacion">Fecha de Contratación</label>
+                        <input type="date" name="f_contratacion" class="form-control" value="{{ $empleado->f_contratacion }}" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="id_departamento">Departamento</label>

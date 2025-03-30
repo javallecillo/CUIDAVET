@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Veterinario extends Model
+class Especialidad extends Model
 {
     use HasFactory;
 
+    protected $table = 'especialidades';
+    
     protected $fillable = [
-        'nombre',
-        'apellido',
-        'telefono',
-        'correo',
-        'especialidad',
-        'estado',
+        'nombre'
     ];
 }

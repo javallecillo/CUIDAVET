@@ -62,8 +62,8 @@
                         <input type="file" name="foto" class="form-control">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="fecha_contratacion">Fecha de Contratación</label>
-                        <input type="date" name="fecha_contratacion" class="form-control" required>
+                        <label for="f_contratacion">Fecha de Contratación</label>
+                        <input type="date" name="f_contratacion" class="form-control" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="id_departamento">Departamento</label>

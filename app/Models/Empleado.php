@@ -71,4 +71,8 @@ class Empleado extends Authenticatable
     {
         return $this->belongsTo(Moneda::class, 'id_moneda');
     }
+    public function compras()
+    {
+        return $this->hasMany(Compra::class, 'id_empleado'); // Relación con las compras
+    }
 }

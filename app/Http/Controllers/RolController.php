@@ -7,9 +7,16 @@ use App\Models\Rol;
 
 class RolController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Rol::all();
+        $query = Rol::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+
+        $roles = $query->paginate(10);
+
         return view('modulos.ajustes', compact('roles'));
     }
 

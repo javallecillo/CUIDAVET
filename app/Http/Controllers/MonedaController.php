@@ -42,9 +42,19 @@ class MonedaController extends Controller
         return redirect()->route('ajustes.index')->with('success', 'Moneda eliminada correctamente.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $monedas = Moneda::all(); // Obtener todas las monedas
-        return view('modulos.ajustes', compact('monedas')); // Pasar las monedas a la vista
+        /*$monedas = Moneda::all(); // Obtener todas las monedas
+        return view('modulos.ajustes', compact('monedas')); // Pasar las monedas a la vista*/
+
+        $query = Moneda::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+
+        $monedas = $query->paginate(10);
+
+        return view('modulos.ajustes', compact('monedas'));
     }
 }

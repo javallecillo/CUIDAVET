@@ -69,6 +69,14 @@
                     </div>
                     
                     <div class="form-group col-md-3">
+                        <label for="id_rol">Rol</label>
+                        <select name="id_rol" class="form-control" required>
+                            <option value="1">Administrador</option>
+                            <option value="2">Usuario</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
                         <label for="estado">Estado</label>
                         <select name="estado" class="form-control" required>
                             <option value="Activo">Activo</option>
