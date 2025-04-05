@@ -1,143 +1,50 @@
 @extends('welcome')
 
 @section('contenido')
-<div class="inicio-container">
-    <section class="content">
-        <div class="box">
+<div class="inicio-container" style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+    <section class="content" style="padding: 20px;">
+        <div class="box" style="background-color:#5493b8; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
             <div class="box-body">
-                
-             <!--
-    Sección de Servicios:
-    - Muestra tarjetas con información de cada servicio.
-    - Cada tarjeta tiene un botón para agendar citas o visitar la tienda.
-  -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4">Nuestros Servicios</h2>
-    <div class="row">
-      <!-- Servicio 1: Consultas Médicas -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/2.jpg" class="card-img-top" alt="Consultas Médicas">
-          <div class="card-body">
-            <h5 class="card-title">Consultas Médicas</h5>
-            <p class="card-text">Ofrecemos consultas médicas generales y especializadas para garantizar la salud de tu mascota.</p>
-            <a href="agendar_cita.html" class="btn btn-primary">
-              <i class="bi bi-calendar-check"></i> Agendar Cita
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Servicio 2: Vacunación -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/3.jpg" class="card-img-top" alt="Vacunación">
-          <div class="card-body">
-            <h5 class="card-title">Vacunación</h5>
-            <p class="card-text">Mantenemos a tu mascota protegida con un esquema completo de vacunación.</p>
-            <a href="agendar_cita.html" class="btn btn-primary">
-              <i class="bi bi-eyedropper"></i> Agendar Cita
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Servicio 3: Cirugías -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/4.jpg" class="card-img-top" alt="Cirugías">
-          <div class="card-body">
-            <h5 class="card-title">Cirugías</h5>
-            <p class="card-text">Realizamos cirugías con equipos de última generación y un equipo altamente capacitado.</p>
-            <a href="agendar_cita.html" class="btn btn-primary">
-              <i class="bi bi-scissors"></i> Agendar Cita
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Servicio 4: Peluquería y Estética -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/1.jpg" class="card-img-top" alt="Peluquería y Estética">
-          <div class="card-body">
-            <h5 class="card-title">Peluquería y Estética</h5>
-            <p class="card-text">Mantén a tu mascota siempre hermosa con nuestros servicios de peluquería y estética.</p>
-            <a href="agendar_cita.html" class="btn btn-primary">
-              <i class="bi bi-scissors"></i> Agendar Cita
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Servicio 5: Atención de Emergencias -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/5.jpg" class="card-img-top" alt="Atención de Emergencias">
-          <div class="card-body">
-            <h5 class="card-title">Atención de Emergencias</h5>
-            <p class="card-text">Estamos disponibles las 24 horas para atender cualquier emergencia de tu mascota.</p>
-            <!-- Sin botón -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Servicio 6: Tienda de Mascotas -->
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="public/img/Servicios/6.jpg" class="card-img-top" alt="Tienda de Mascotas">
-          <div class="card-body">
-            <h5 class="card-title">Tienda de Mascotas</h5>
-            <p class="card-text">Encuentra los mejores productos para el bienestar de tus amigos peludos.</p>
-            <a href="tienda.html" class="btn btn-primary">
-              <i class="bi bi-cart"></i> Visitar Tienda
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    Sección del Blog de Cuidados:
-    - Muestra artículos adicionales sobre el cuidado de mascotas.
-  -->
-  <section id="blog" class="container my-5">
-    <h2 class="text-center">Blog de Cuidados</h2>
-    <div class="row">
-      <!-- Artículo 1 -->
-      <div class="col-md-6">
-        <div class="card">
-          <img src="public/img/Cuidados/1.jpg" class="card-img-top" alt="Cuidados de Perros">
-          <div class="card-body">
-            <h5 class="card-title">Cuidados Básicos para Perros</h5>
-            <p class="card-text">Consejos esenciales para la salud y bienestar de tu mascota.</p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Artículo 2 -->
-      <div class="col-md-6">
-        <div class="card">
-          <img src="public/img/Cuidados/2.jpg" class="card-img-top" alt="Cuidados de Gatos">
-          <div class="card-body">
-            <h5 class="card-title">Alimentación Saludable para Gatos</h5>
-            <p class="card-text">Descubre cómo proporcionar una dieta equilibrada.</p>
-            <a href="#" class="btn btn-primary">Leer más</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+            <!-- Breve presentación del sistema -->
+            <div class="presentation" style="text-align: center; margin-bottom: 30px; padding: 40px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.8);">
+                <h1 class="title" style="font-size: 36px; font-weight: bold; color: #2c3e50; margin-bottom: 10px;">Bienvenido a Cuidavet</h1>
+                <p class="description" style="font-size: 18px; color: #555;">Cuidavet es un sistema diseñado para gestionar los servicios de una veterinaria de manera eficiente. Nuestro objetivo es brindar la mejor atención para tus mascotas.</p>
+            </div>
+            <!-- Encabezado de servicios -->
+            <div class="services-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-size: 32px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Nuestros Servicios</h2>
+                <p style="font-size: 18px; color: #e0f7fa;">Descubre todo lo que ofrecemos para el cuidado de tus mascotas.</p>
+            </div>
+            <!-- Cards de servicios -->
+            <div class="service-cards" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: calc(33.333% - 20px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); text-align: center; background-color: rgba(255, 255, 255, 0.8);">
+                <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Consultas veterinarias</h3>
+                <p class="card-description" style="font-size: 14px; color: #555;">Atención personalizada para el diagnóstico y tratamiento de tus mascotas.</p>
+                </div>
+                <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: calc(33.333% - 20px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); text-align: center; background-color: rgba(255, 255, 255, 0.8);">
+                <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Vacunación</h3>
+                <p class="card-description" style="font-size: 14px; color: #555;">Protege a tus mascotas con nuestro servicio de vacunación.</p>
+                </div>
+                <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: calc(33.333% - 20px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); text-align: center; background-color: rgba(255, 255, 255, 0.8);">
+                <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Cirugías</h3>
+                <p class="card-description" style="font-size: 14px; color: #555;">Realizamos procedimientos quirúrgicos con los más altos estándares.</p>
+                </div>
+                <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: calc(33.333% - 20px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); text-align: center; background-color: rgba(255, 255, 255, 0.8);">
+                <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Estética y cuidado</h3>
+                <p class="card-description" style="font-size: 14px; color: #555;">Servicios de peluquería y cuidado para mantener a tus mascotas felices.</p>
+                </div>
+                <div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: calc(33.333% - 20px); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); text-align: center; background-color: rgba(255, 255, 255, 0.8);">
+                <h3 class="card-title" style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Venta de productos</h3>
+                <p class="card-description" style="font-size: 14px; color: #555;">Encuentra alimentos y accesorios de calidad para tus mascotas.</p>
+                </div>
+            </div>
+            <!-- Información adicional sin tarjeta -->
+            <div class="information" style="margin-top: 10px; text-align: center; padding: 20px;">
+                <h2 class="subtitle" style="font-size: 28px; font-weight: bold; color: #fff; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">Información</h2>
+                <p class="info-text" style="font-size: 16px; color: #e0f7fa; line-height: 1.8;">Contamos con un equipo de profesionales altamente capacitados y con instalaciones modernas para garantizar el bienestar de tus mascotas.</p>
+            </div>
             </div>
         </div>
     </section>
 </div>
 @endsection
-
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('public/css/inicio.css') }}">
-@endpush
-

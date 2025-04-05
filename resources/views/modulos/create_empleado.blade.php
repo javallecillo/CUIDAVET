@@ -40,12 +40,24 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="id_rol">Rol</label>
-                        <select name="id_rol" class="form-control" required>
+                        <select name="id_rol" id="id_rol" class="form-control" required>
                             @foreach($roles as $rol)
                                 <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Especialidad (Visible solo si el rol es "doctor") -->
+                    <div class="form-group col-md-3" id="especialidad-container" style="display: none;">
+                        <label for="especialidad">Especialidad</label>
+                        <select name="especialidad" id="especialidad" class="form-control">
+                            <option value="">Seleccione una especialidad</option>
+                            @foreach($especialidades as $especialidad)
+                                <option value="{{ $especialidad->nombre }}">{{ $especialidad->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group col-md-3">
                         <label for="f_nacimiento">Fecha de Nacimiento</label>
                         <input type="date" name="f_nacimiento" class="form-control" required>
@@ -56,10 +68,6 @@
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
                         </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="foto">Foto</label>
-                        <input type="file" name="foto" class="form-control">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="f_contratacion">Fecha de Contratación</label>
@@ -114,4 +122,25 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const rolSelect = document.getElementById('id_rol');
+            const especialidadContainer = document.getElementById('especialidad-container');
+
+            // Mostrar u ocultar el campo de especialidad según el rol seleccionado
+            function toggleEspecialidad() {
+                if (rolSelect.value == '1') { // Suponiendo que el rol "doctor" tiene el ID 2
+                    especialidadContainer.style.display = 'block';
+                } else {
+                    especialidadContainer.style.display = 'none';
+                    document.getElementById('especialidad').value = ''; // Limpiar el campo si no es visible
+                }
+            }
+
+            // Ejecutar al cargar la página y al cambiar el rol
+            toggleEspecialidad();
+            rolSelect.addEventListener('change', toggleEspecialidad);
+        });
+    </script>
 @endsection

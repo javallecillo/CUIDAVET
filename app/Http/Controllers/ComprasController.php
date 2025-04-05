@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Compra;
 use App\Models\Proveedor;
+use Illuminate\Support\Facades\Auth; 
+use App\Models\Producto;// Agregar esta línea para importar Auth
 
 class ComprasController extends Controller
 {
@@ -15,8 +17,10 @@ class ComprasController extends Controller
 
     public function create()
     {
-        $proveedores = Proveedor::all();
-        return view('modulos.compras_create', compact('proveedores'));
+        $proveedores = Proveedor::all(); // Obtener proveedores
+        $productos = Producto::all(); // Obtener productos del inventario
+
+        return view('modulos.compras_create', compact('proveedores', 'productos')); // Pasar $productos a la vista
     }
 
     public function store(Request $request)
@@ -24,16 +28,35 @@ class ComprasController extends Controller
         $request->validate([
             'proveedor_id' => 'required|exists:proveedores,id',
             'fecha' => 'required|date',
-            'total' => 'required|numeric|min:0',
-            'estado' => 'required|in:Pendiente,Pagada,Cancelada',
+            'productos' => 'required|array',
+            'productos.*.id' => 'required|exists:productos,id',
+            'productos.*.cantidad' => 'required|integer|min:1',
+            'productos.*.precio' => 'required|numeric|min:0',
         ]);
-
-        // Agregar el ID del empleado autenticado
-        Compra::create(array_merge($request->all(), [
-            'id_empleado' => auth()->id(), // Asegúrate de que auth()->id() devuelva el ID del empleado
-        ]));
-
-        return redirect()->route('compras.index')->with('success', 'Compra registrada correctamente.');
+    
+        // Crear la compra
+        $compra = Compra::create([
+            'proveedor_id' => $request->proveedor_id,
+            'fecha' => $request->fecha,
+            'total' => $request->total,
+            'id_empleado' => Auth::id(), // Asignar el empleado autenticado
+        ]);
+    
+        // Guardar los productos de la compra
+        foreach ($request->productos as $productoData) {
+            // Crear el detalle de la compra
+            $compra->productos()->attach($productoData['id'], [
+                'cantidad' => $productoData['cantidad'],
+                'precio' => $productoData['precio'],
+            ]);
+    
+            // Actualizar las existencias del producto
+            $producto = Producto::find($productoData['id']);
+            $producto->cantidad += $productoData['cantidad']; // Sumar las unidades compradas
+            $producto->save();
+        }
+    
+        return redirect()->route('compras.index')->with('success', 'Compra registrada correctamente y existencias actualizadas.');
     }
 
     public function edit($id)
@@ -50,14 +73,33 @@ class ComprasController extends Controller
             'fecha' => 'required|date',
             'total' => 'required|numeric|min:0',
             'estado' => 'required|in:Pendiente,Pagada,Cancelada',
+            'productos' => 'required|array',
+            'productos.*.id' => 'required|exists:productos,id',
+            'productos.*.cantidad' => 'required|numeric|min:1',
+            'productos.*.precio' => 'required|numeric|min:0.01',
         ]);
 
         $compra = Compra::findOrFail($id);
 
-        // Actualizar la compra con el ID del empleado autenticado
-        $compra->update(array_merge($request->all(), [
-            'id_empleado' => auth()->id(), 
-        ]));
+        // Actualizar datos principales de la compra
+        $compra->update([
+            'proveedor_id' => $request->proveedor_id,
+            'fecha' => $request->fecha,
+            'total' => $request->total,
+            'estado' => $request->estado, // El estado se actualiza aquí
+            'id_empleado' => Auth::id(),
+        ]);
+
+        // Actualizar productos de la compra
+        $productos = $request->input('productos', []);
+        $compra->productos()->sync([]); // Eliminar productos existentes
+
+        foreach ($productos as $producto) {
+            $compra->productos()->attach($producto['id'], [
+                'cantidad' => $producto['cantidad'],
+                'precio' => $producto['precio'],
+            ]);
+        }
 
         return redirect()->route('compras.index')->with('success', 'Compra actualizada correctamente.');
     }

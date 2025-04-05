@@ -13,12 +13,12 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Teléfono</th>
-                            <th>Correo</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                            <th style="color: white; background-color: #0d98ba;">Apellido</th>
+                            <th style="color: white; background-color: #0d98ba;">Teléfono</th>
+                            <th style="color: white; background-color: #0d98ba;">Correo</th>
+                            <th style="color: white; background-color: #0d98ba;">Estado</th>
+                            <th style="color: white; background-color: #0d98ba;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

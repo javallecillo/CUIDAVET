@@ -7,6 +7,15 @@
     <section class="content">
         <div class="box">
             <div class="box-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -29,10 +38,6 @@
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
                         <input type="number" name="cantidad" id="cantidad" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="imagen">Imagen</label>
-                        <input type="file" name="imagen" id="imagen" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>

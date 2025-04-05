@@ -26,9 +26,9 @@ class Empleado extends Authenticatable
         'correo',
         'contrasenia',
         'id_rol',
+        'id_especialidad',
         'f_nacimiento',
         'genero',
-        'foto',
         'f_contratacion',
         'id_departamento',
         'dias_laborales',
@@ -74,5 +74,9 @@ class Empleado extends Authenticatable
     public function compras()
     {
         return $this->hasMany(Compra::class, 'id_empleado'); // Relación con las compras
+    }
+    public function especialidad()
+    {
+        return $this->belongsTo(Especialidad::class, 'id_especialidad');
     }
 }

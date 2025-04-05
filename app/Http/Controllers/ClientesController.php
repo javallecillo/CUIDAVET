@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Moneda;
 use App\Models\Nacionalidad;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ClientesController extends Controller
 {
@@ -106,27 +107,17 @@ class ClientesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-   /**
- * Buscar cliente por DNI
- * 
- * @param Request $request
- * @return \Illuminate\Http\JsonResponse
- */
     public function buscarPorDni(Request $request)
     {
+        Log::info('Método buscarPorDni llamado con DNI: ' . $request->input('dni'));
+
         $dni = $request->input('dni');
         $cliente = Cliente::where('dni', $dni)->first();
-        
+
         if ($cliente) {
             return response()->json([
                 'success' => true,
-                'cliente' => [
-                    'id' => $cliente->id,
-                    'nombre' => $cliente->nombre,
-                    'apellido' => $cliente->apellido,
-                    'nombre_completo' => $cliente->nombre . ' ' . $cliente->apellido,
-                    'dni' => $cliente->dni
-                ]
+                'cliente' => $cliente
             ]);
         } else {
             return response()->json([

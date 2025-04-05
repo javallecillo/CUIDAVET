@@ -20,4 +20,19 @@ class Producto extends Model
         'precio_venta',
         'estado',
     ];
+
+
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'compra_producto')
+                    ->withPivot('cantidad', 'precio')
+                    ->withTimestamps();
+    }
+
+    public function ventas()
+    {
+        return $this->belongsToMany(Venta::class, 'producto_venta')
+                    ->withPivot('cantidad', 'precio')
+                    ->withTimestamps();
+    }
 }

@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="cliente_id">Cliente</label>
-                        <select name="cliente_id" class="form-control" required>
+                        <select name="cliente_id" id="cliente_id" class="form-control" required>
                             @foreach($clientes as $cliente)
                                 <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                             @endforeach
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label for="veterinario_id">Veterinario</label>
-                        <select name="veterinario_id" class="form-control" required>
+                        <select name="veterinario_id" id="veterinario_id" class="form-control" required>
                             @foreach($veterinarios as $veterinario)
                                 <option value="{{ $veterinario->id }}">{{ $veterinario->nombre }}</option>
                             @endforeach
@@ -27,15 +27,15 @@
                     </div>
                     <div class="form-group">
                         <label for="fecha">Fecha</label>
-                        <input type="date" name="fecha" class="form-control" required>
+                        <input type="date" name="fecha" id="fecha" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="hora">Hora</label>
-                        <input type="time" name="hora" class="form-control" required>
+                        <input type="time" name="hora" id="hora" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="estado">Estado</label>
-                        <select name="estado" class="form-control" required>
+                        <select name="estado" id="estado" class="form-control" required>
                             <option value="Pendiente">Pendiente</option>
                             <option value="Confirmada">Confirmada</option>
                             <option value="Cancelada">Cancelada</option>

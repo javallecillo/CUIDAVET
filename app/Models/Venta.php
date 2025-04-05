@@ -14,7 +14,15 @@ class Venta extends Model
         'fecha',
         'total',
         'estado',
+        'rtn',
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'producto_venta')
+                    ->withPivot('cantidad', 'precio')
+                    ->withTimestamps();
+    }
 
     public function cliente()
     {

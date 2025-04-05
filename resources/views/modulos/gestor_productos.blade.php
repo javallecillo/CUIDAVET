@@ -17,14 +17,14 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th>Código</th>
-                                <th>Cantidad</th>
-                                <th>Precio Compra</th>
-                                <th>Precio Venta</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
+                                <th  style="color: white; background-color: #0d98ba;">Nombre</th>
+                                <th  style="color: white; background-color: #0d98ba;">Categoría</th>
+                                <th  style="color: white; background-color: #0d98ba;">Código</th>
+                                <th  style="color: white; background-color: #0d98ba;">Cantidad</th>
+                                <th  style="color: white; background-color: #0d98ba;">Precio Compra</th>
+                                <th  style="color: white; background-color: #0d98ba;">Precio Venta</th>
+                                <th  style="color: white; background-color: #0d98ba;">Estado</th>
+                                <th  style="color: white; background-color: #0d98ba;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

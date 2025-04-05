@@ -11,6 +11,35 @@
         <div class="box">
             <div class="box-body table-responsive">
 
+            <!-- Formulario para filtrar por fechas -->
+            <div class="mb-2 row">
+
+                <div class="col-md-6">
+
+                    <h4>Buscar por fecha</h4>
+
+                    <form method="GET" action="{{ route('compras.index') }}" class="form-inline mb-3">
+                        <div class="col-md-5 form-group">
+                            <label for="fecha_inicio">Desde:</label>
+                            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control" value="{{ request('fecha_inicio') }}">
+                        </div>
+                        <div class="col-md-5 form-group mx-sm-3">
+                            <label for="fecha_fin">Hasta:</label>
+                            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control" value="{{ request('fecha_fin') }}">
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                        </div>
+
+                        
+                    </form>
+
+                </div>
+            </div>
+            <br>
+            <!-- Fin del formulario -->
+
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -22,25 +51,20 @@
                     {{ session('error') }}
                 </div>
             @endif
-
-            @if($compras->isEmpty())
-                <div class="alert alert-warning">
-                    No hay compras registradas.
-                </div>
-            @else
-                <table class="table table-bordered table-hover">
+            
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Proveedor</th>
-                        <th>Fecha</th>
-                        <th>Total</th>
-                        <th>Estado</th>
-                        <th>Empleado</th> <!-- Nueva columna -->
-                        <th>Acciones</th>
+                        <th style="color: white; background-color: #0d98ba;">Proveedor</th>
+                        <th style="color: white; background-color: #0d98ba;">Fecha</th>
+                        <th style="color: white; background-color: #0d98ba;">Total</th>
+                        <th style="color: white; background-color: #0d98ba;">Estado</th>
+                        <th style="color: white; background-color: #0d98ba;">Empleado</th> <!-- Nueva columna -->
+                        <th style="color: white; background-color: #0d98ba;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($compras as $compra)
+                    @forelse ($compras as $compra)
                         <tr>
                             <td>{{ $compra->proveedor->nombre }}</td>
                             <td>{{ $compra->fecha }}</td>
@@ -57,11 +81,13 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No hay veterinarios registrados</td>
+                        </tr>
+                    @endforelse
                 </tbody>
-                </table>
-            @endif
-            </div>
+            </table>
         </div>
     </section>
 @endsection

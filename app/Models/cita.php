@@ -10,6 +10,7 @@ class Cita extends Model
 
     protected $fillable = [
         'cliente_id',
+        'mascota_id',
         'veterinario_id',
         'fecha',
         'hora',
@@ -24,6 +25,11 @@ class Cita extends Model
 
     public function veterinario()
     {
-        return $this->belongsTo(Veterinario::class);
+        return $this->belongsTo(Empleado::class, 'veterinario_id');
+    }
+
+    public function mascota()
+    {
+        return $this->belongsTo(Mascota::class);
     }
 }

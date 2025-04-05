@@ -99,40 +99,37 @@
 
     <!-- Script para la búsqueda de cliente por DNI -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Buscar cliente por DNI
-        $('#btnBuscarCliente').click(function() {
-            var dni = $('#dni_busqueda').val();
-            if (dni.trim() === '') {
-                $('#resultado_busqueda').html('<div class="alert alert-warning">Ingrese un DNI para buscar</div>');
-                return;
-            }
-            
-            $.ajax({
-                url: "{{ route('clientes.buscarPorDni') }}",
-                type: "GET",
-                data: { dni: dni },
-                success: function(response) {
-                    console.log('Respuesta completa:', response); // Depuración: Muestra la respuesta completa
-                    if (response.success) {
-                        console.log('Cliente:', response.cliente); // Depuración: Muestra los datos del cliente
-                        $('#cliente_nombre').val(response.cliente.nombre + ' ' + response.cliente.apellido);
-                        $('#cliente_id').val(response.cliente.id);
-                        $('#resultado_busqueda').html('<div class="alert alert-success">Cliente encontrado: ' + response.cliente.nombre + ' ' + response.cliente.apellido + '</div>');
-                    } else {
-                        $('#resultado_busqueda').html('<div class="alert alert-danger">Cliente no encontrado</div>');
+    <script>
+        $(document).ready(function() {
+            $('#btnBuscarCliente').click(function() {
+                var dni = $('#dni_busqueda').val();
+                if (dni.trim() === '') {
+                    $('#resultado_busqueda').html('<div class="alert alert-warning">Ingrese un DNI para buscar</div>');
+                    return;
+                }
+                
+                $.ajax({
+                    url: "{{ route('clientes.buscarPorDni') }}", // Asegúrate de que esta ruta sea correcta
+                    type: "GET",
+                    data: { dni: dni },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#cliente_nombre').val(response.cliente.nombre + ' ' + response.cliente.apellido);
+                            $('#cliente_id').val(response.cliente.id);
+                            $('#resultado_busqueda').html('<div class="alert alert-success">Cliente encontrado: ' + response.cliente.nombre + ' ' + response.cliente.apellido + '</div>');
+                        } else {
+                            $('#resultado_busqueda').html('<div class="alert alert-danger">Cliente no encontrado</div>');
+                            $('#cliente_nombre').val('');
+                            $('#cliente_id').val('');
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#resultado_busqueda').html('<div class="alert alert-danger">Error en la búsqueda: ' + xhr.responseText + '</div>');
                         $('#cliente_nombre').val('');
                         $('#cliente_id').val('');
                     }
-                },
-                error: function() {
-                    $('#resultado_busqueda').html('<div class="alert alert-danger">Error en la búsqueda</div>');
-                    $('#cliente_nombre').val('');
-                    $('#cliente_id').val('');
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
 @endsection

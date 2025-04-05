@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Especialidad;
+use App\Models\Veterinario;
 
 class EspecialidadesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $especialidades = Especialidad::all();
-        return view('modulos.ajustes', compact('especialidades'));
+        $query = Especialidad::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+
+        $especialidades= $query->paginate(10);
+
+        $veterinarios = Veterinario::with('especialidad')->get();
+
+        return view('modulos.ajustes', compact('especialidades', 'veterinarios'));
     }
 
     /**

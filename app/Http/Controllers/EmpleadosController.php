@@ -8,6 +8,7 @@ use App\Models\Ajustes;
 use App\Models\Moneda;
 use App\Models\Departamento;
 use App\Models\Rol;
+use App\Models\Especialidad;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +33,10 @@ class EmpleadosController extends Controller
         $monedas = Moneda::all();
         $departamentos = Departamento::all();
         $roles = Rol::all();
-        return view('modulos.create_empleado', compact('monedas', 'departamentos', 'roles'));
+        $especialidades = Especialidad::all(); // Obtener todas las especialidades
+    
+        return view('modulos.create_empleado', compact('monedas', 'departamentos', 'roles', 'especialidades'));
+    
         /*
         Empleado::create([
             'nombre' => 'Jhair',
@@ -75,12 +79,18 @@ class EmpleadosController extends Controller
             'salario' => 'required|numeric',
             'id_moneda' => 'required',
             'estado' => 'required',
+            'especialidad' => 'nullable|string|max:255', // Validación para especialidad
         ]);
 
         $data = $request->all();
 
         // Encriptar la contraseña antes de guardar
         $data['contrasenia'] = Hash::make($data['contrasenia']);
+
+        // Si el rol no es "doctor", eliminar el campo de especialidad
+        if ($data['id_rol'] != 1) { // Suponiendo que el rol "doctor" tiene el ID 2
+            $data['especialidad'] = null;
+        }
 
         Empleado::create($data);
 
@@ -93,6 +103,7 @@ class EmpleadosController extends Controller
         $monedas = Moneda::all();
         $departamentos = Departamento::all();
         $roles = Rol::all();
+        $especialidades = Especialidad::all();
         return view('modulos.edit_empleado', compact('empleado', 'monedas', 'departamentos', 'roles'));
     }
 
@@ -113,6 +124,7 @@ class EmpleadosController extends Controller
             'salario' => 'required|numeric',
             'id_moneda' => 'required',
             'estado' => 'required',
+            'especialidad' => 'nullable|string|max:255', // Validación para especialidad
         ]);
 
         $empleado = Empleado::findOrFail($id);
@@ -125,6 +137,11 @@ class EmpleadosController extends Controller
         } else {
             // Si la contraseña está vacía, eliminarla del array de datos
             unset($data['contrasenia']);
+        }
+
+        // Si el rol no es "doctor", eliminar el campo de especialidad
+        if ($data['id_rol'] != 1) { // Suponiendo que el rol "doctor" tiene el ID 2
+            $data['especialidad'] = null;
         }
 
         $empleado->update($data);

@@ -13,26 +13,18 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Imagen</th>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th>Código</th>
-                                <th>Cantidad</th>
-                                <th>Precio Compra</th>
-                                <th>Precio Venta</th>
-                                <th>Estado</th>
+                                <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                <th style="color: white; background-color: #0d98ba;">Categoría</th>
+                                <th style="color: white; background-color: #0d98ba;">Código</th>
+                                <th style="color: white; background-color: #0d98ba;">Cantidad</th>
+                                <th style="color: white; background-color: #0d98ba;">Precio Compra</th>
+                                <th style="color: white; background-color: #0d98ba;">Precio Venta</th>
+                                <th style="color: white; background-color: #0d98ba;">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($productos as $producto)
                                 <tr>
-                                    <td>
-                                        @if ($producto->imagen)
-                                            <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen del producto" width="100">
-                                        @else
-                                            Sin imagen
-                                        @endif
-                                    </td>
                                     <td>{{ $producto->nombre }}</td>
                                     <td>
                                         @php

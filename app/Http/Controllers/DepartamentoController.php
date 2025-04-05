@@ -7,9 +7,16 @@ use App\Models\Departamento;
 
 class DepartamentoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $departamentos = Departamento::all();
+        $query = Departamento::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+
+        $departamentos = $query->paginate(10);
+
         return view('modulos.ajustes', compact('departamentos'));
     }
 

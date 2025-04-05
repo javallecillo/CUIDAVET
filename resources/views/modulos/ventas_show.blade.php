@@ -13,6 +13,10 @@
                         <td>{{ $venta->cliente->nombre }}</td>
                     </tr>
                     <tr>
+                        <th>RTN</th>
+                        <td>{{ $venta->rtn ?? 'Sin RTN' }}</td>
+                    </tr>
+                    <tr>
                         <th>Empleado</th>
                         <td>{{ $venta->empleado->nombre ?? 'N/A' }}</td>
                     </tr>

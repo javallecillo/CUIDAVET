@@ -13,12 +13,12 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Cliente</th>
-                            <th>Veterinario</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                            <th style="color: white; background-color: #0d98ba;">Cliente</th>
+                            <th style="color: white; background-color: #0d98ba;">Veterinario</th>
+                            <th style="color: white; background-color: #0d98ba;">Fecha</th>
+                            <th style="color: white; background-color: #0d98ba;">Hora</th>
+                            <th style="color: white; background-color: #0d98ba;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -31,30 +31,27 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Cliente</th>
-                                <th>Fecha</th>
-                                <th>Total</th>
-                                <th>Estado</th>
-                                <th>Empleado</th>
-                                <th>Acciones</th>
+                                <th style="color: white; background-color: #0d98ba;">Cliente</th>
+                                <th style="color: white; background-color: #0d98ba;">RTN</th>
+                                <th style="color: white; background-color: #0d98ba;">Fecha</th>
+                                <th style="color: white; background-color: #0d98ba;">Total</th>
+                                <th style="color: white; background-color: #0d98ba;">Estado</th>
+                                <th style="color: white; background-color: #0d98ba;">Empleado</th>
+                                <th style="color: white; background-color: #0d98ba;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($ventas as $venta)
                                 <tr>
                                     <td>{{ $venta->cliente->nombre }}</td>
+                                    <td>{{ $venta->rtn ?? 'Sin RTN' }}</td>
                                     <td>{{ $venta->fecha }}</td>
                                     <td>{{ $venta->total }}</td>
                                     <td>{{ $venta->estado }}</td>
                                     <td>{{ $venta->empleado->nombre ?? 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('ventas.show', $venta->id) }}" class="btn btn-info">Mostrar</a>
-                                        <a href="{{ route('ventas.edit', $venta->id) }}" class="btn btn-warning">Editar</a>
-                                        <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
+                                        
                                     </td>
                                 </tr>
                             @endforeach

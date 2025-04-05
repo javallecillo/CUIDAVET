@@ -20,8 +20,8 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
+                            <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                            <th style="color: white; background-color: #0d98ba;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

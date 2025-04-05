@@ -44,16 +44,16 @@
                     <!-- Sub-menu item: Citas -->
                     <li><a href="{{ url('Citas') }}">
                         <i class="fa fa-calendar"></i> Citas</a></li>
-                    <!-- Sub-menu item: Internaciones -->
+                    <!-- Sub-menu item: Internaciones
                     <li><a href="{{ url('Internaciones') }}">
-                        <i class="fa fa-bed"></i> Internaciones</a></li>
+                        <i class="fa fa-bed"></i> Internaciones</a></li> -->
                 </ul>
             </li>
             <!-- Horizontal line separator -->
             <hr>
-            <!-- Menu item: Cajas -->
+            <!-- Menu item: Cajas 
             <li><a href="{{ url('Cajas') }}">
-                <i class="fa fa-fax"></i> <span>Cajas</span></a></li>
+                <i class="fa fa-fax"></i> <span>Cajas</span></a></li>-->
             <!-- Menu item: Productos with sub-menu -->
             <li class="treeview">
                 <a href="#">
@@ -84,13 +84,13 @@
             <!-- Menu item: Compras -->
             <li><a href="{{ url('Compras') }}">
                 <i class="fa fa-shopping-cart"></i> <span>Compras</span></a></li>
-            <!-- Menu item: Ventas -->
+            <!--  Menu item: Ventas -->
             <li><a href="{{ url('Ventas') }}">
                 <i class="fa fa-money"></i> <span>Ventas</span></a></li>
-            <!-- Menu item: Informes -->
+                 <!-- Menu item: Informes 
             <li><a href="{{ url('Informes') }}">
-                <i class="fa fa-bar-chart"></i> <span>Informes</span></a></li>
-            <!-- Horizontal line separator -->
+                <i class="fa fa-bar-chart"></i> <span>Informes</span></a></li>-->
+             <!-- Horizontal line separator -->
             @if(auth()->user()->id_rol == 1)
                 <hr>
             <!-- Menu item: Ajustes -->

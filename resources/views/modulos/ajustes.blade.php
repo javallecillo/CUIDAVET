@@ -118,31 +118,61 @@
                 @elseif(request()->is('roles'))
                     <!-- Sección de roles -->
                     <div class="section">
-                        <h2>Roles</h2>
-                        <form action="{{ route('roles.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del rol" required>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Agregar Rol</button>
-                                </div>
+
+                        <div class="mb-2 row">
+                            
+                            <!-- Formulario para agregar roles -->
+                            <div class="col-md-6">
+
+                                <h4>Agregar rol</h4>
+
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
+                                    @csrf
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar rol" required>
+                                        <br>
+                                    </div>
+                                
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                                    </div>
+                                </form>
+                                <br>
                             </div>
-                        </form>
+
+                            <!-- Formulario para buscar roles -->
+                            <div class="col-md-6">
+                                <h4>Buscar rol</h4>
+                                <form action="{{ route('roles.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                         <br>
+
                         <table class="table table-bordered table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($roles) && count($roles) > 0)
                                     @foreach($roles as $rol)
                                         <tr>
+                                            <td>{{ $loop->iteration + $roles->firstItem() - 1 }}</td>
                                             <td>{{ $rol->nombre }}</td>
                                             <td>
                                                 <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" style="display:inline-block;">
@@ -156,11 +186,14 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No se encontraron roles.</td>
+                                        <td colspan="8" class="text-center">No se encontraron roles.</td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            {{ $roles->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 @elseif(request()->is('monedas'))
                     <!-- Sección de monedas -->
@@ -172,7 +205,7 @@
 
                                 <h4>Agregar Moneda</h4>
                                 
-                                <form action="{{ route('monedas.store') }}" method="POST" class="d-flex align-items-center gap-2">
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
                                     @csrf
 
                                     <div class="col-md-6">
@@ -214,15 +247,17 @@
                         <table class="table table-bordered table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Símbolo</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Símbolo</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($monedas) && count($monedas) > 0)
                                     @foreach($monedas as $moneda)
                                         <tr>
+                                            <td>{{ $loop->iteration + $monedas->firstItem() - 1 }}</td>
                                             <td>{{ $moneda->nombre }}</td>
                                             <td>{{ $moneda->simbolo }}</td>
                                             <td>
@@ -237,7 +272,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="3">No se encontraron monedas.</td>
+                                        <td colspan="8" class="text-center">No se encontraron monedas.</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -249,31 +284,61 @@
                 @elseif(request()->is('departamentos'))
                     <!-- Sección de departamentos -->
                     <div class="section">
-                        <h2>Departamentos</h2>
-                        <form action="{{ route('departamentos.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del departamento" required>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Agregar Departamento</button>
-                                </div>
+
+                        <div class="mb-2 row">
+                            
+                            <!-- Formulario para agregar departamento -->
+                            <div class="col-md-6">
+
+                                <h4>Agregar departamento</h4>
+
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
+                                    @csrf
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar departamento" required>
+                                        <br>
+                                    </div>
+                                
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                                    </div>
+                                </form>
+                                <br>
                             </div>
-                        </form>
+
+                            <!-- Formulario para buscar departamentos -->
+                            <div class="col-md-6">
+                                <h4>Buscar departamento</h4>
+                                <form action="{{ route('departamentos.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                         <br>
+
                         <table class="table table-bordered table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($departamentos) && count($departamentos) > 0)
                                     @foreach($departamentos as $departamento)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td> <!-- Cambiar a $loop->iteration si no hay paginación -->
                                             <td>{{ $departamento->nombre }}</td>
                                             <td>
                                                 <form action="{{ route('departamentos.destroy', $departamento->id) }}" method="POST" style="display:inline-block;">
@@ -287,54 +352,74 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No se encontraron departamentos.</td>
+                                        <td colspan="8" class="text-center"></td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            {{ $departamentos->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 @elseif(request()->is('nacionalidades'))
                     <!-- Sección de nacionalidades -->
                     <div class="section">
-                        <h2>Nacionalidades</h2>
-
-                        <div class="mb-1 row">
+                        
+                        <div class="mb-2 row">
+                            
                             <!-- Formulario para agregar nacionalidades -->
-                            <form action="{{ route('nacionalidades.store') }}" method="POST" class="d-flex align-items-center gap-2">
-                                @csrf
+                            <div class="col-md-6">
+
+                                <h4>Agregar nacionalidad</h4>
+
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
+                                    @csrf
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar nacionalidad" required>
+                                        <br>
+                                    </div>
                                 
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar nacionalidad" required>
-                                </div>
-                            
-                                <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
-                            
-                            </form>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                                    </div>
+                                </form>
+                                <br>
+                            </div>
 
                             <!-- Formulario para buscar nacionalidades -->
-                            <form action="{{ route('nacionalidades.index') }}" method="GET" class="d-flex align-items-center gap-2">
-                                
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
-                            </form>
+                            <div class="col-md-6">
+                                <h4>Buscar nacionalidad</h4>
+                                <form action="{{ route('nacionalidades.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
 
                         </div>
+
                         
                         <br>
                         <table class="table table-bordered table-striped table-sm mt-2">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($nacionalidades) && $nacionalidades->count() > 0)
                                     @foreach($nacionalidades as $nacionalidad)
                                         <tr>
+                                            <td>{{ $loop->iteration + $nacionalidades->firstItem() - 1 }}</td>
                                             <td>{{ $nacionalidad->nombre }}</td>
                                             <td>
                                                 <form action="{{ route('nacionalidades.destroy', $nacionalidad->id) }}" method="POST" style="display:inline-block;">
@@ -348,7 +433,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No se encontraron nacionalidades.</td>
+                                        <td colspan="8" class="text-center">No se encontraron nacionalidades.</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -357,34 +442,66 @@
                             {{ $nacionalidades->onEachSide(1)->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
+
+                    
                 @elseif(request()->is('servicios'))
                     <!-- Sección de servicios -->
                     <div class="section">
-                        <h2>Servicios</h2>
-                        <form action="{{ route('servicios.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del servicio" required>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Agregar Servicio</button>
-                                </div>
+
+                        <div class="mb-2 row">
+                            
+                            <!-- Formulario para agregar servicio -->
+                            <div class="col-md-6">
+
+                                <h4>Agregar servicio</h4>
+
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
+                                    @csrf
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar servicio" required>
+                                        <br>
+                                    </div>
+                                
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                                    </div>
+                                </form>
+                                <br>
                             </div>
-                        </form>
+
+                            <!-- Formulario para buscar servicios -->
+                            <div class="col-md-6">
+                                <h4>Buscar servicio</h4>
+                                <form action="{{ route('servicios.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                         <br>
+                        
                         <table class="table table-bordered table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($servicios) && count($servicios) > 0)
                                     @foreach($servicios as $servicio)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $servicio->nombre }}</td>
                                             <td>
                                                 <form action="{{ route('servicios.destroy', $servicio->id) }}" method="POST" style="display:inline-block;">
@@ -398,42 +515,82 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No se encontraron servicios.</td>
+                                        <td colspan="8" class="text-center">No se encontraron servicios.</td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
+
+                        <div class="text-center">
+                            {{ $servicios->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
+
                     </div>
+
+
                     @elseif(request()->is('especialidades'))
+
                     <!-- Sección de especialidades -->
                     <div class="section">
-                        <h2>Especialidades</h2>
-                        <form action="{{ route('especialidades.store') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre de la especialidad" required>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Agregar Especialidad</button>
-                                </div>
+
+                        <div class="mb-2 row">
+                            
+                            <!-- Formulario para agregar especialidades -->
+                            <div class="col-md-6">
+
+                                <h4>Agregar especialidad</h4>
+
+                                <form action="{{ url()->current() }}" method="POST" class="d-flex align-items-center gap-2">
+                                    @csrf
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="nombre" placeholder="Agregar especialidad" required>
+                                        <br>
+                                    </div>
+                                
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+                                    </div>
+                                </form>
+                                <br>
                             </div>
-                        </form>
+
+                            <!-- Formulario para buscar especialidades -->
+                            <div class="col-md-6">
+                                <h4>Buscar especialidad</h4>
+                                <form action="{{ route('especialidades.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                    
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar..." value="{{ request('search') }}">
+                                        <br>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
                     </div>
                     <br>
+
+
                     <div class="section">
                         <table class="table table-bordered table-striped mt-3">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
+                                    <th style="color: white; background-color: #0d98ba;">#</th>
+                                    <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                    <th style="color: white; background-color: #0d98ba;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($especialidades) && count($especialidades) > 0)
                                     @foreach($especialidades as $especialidad)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $especialidad->nombre }}</td>
                                             <td>
                                                 <form action="{{ route('especialidades.destroy', $especialidad->id) }}" method="POST" style="display:inline-block;">
@@ -447,12 +604,16 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No se encontraron especialidades.</td>
+                                        <td colspan="8" class="text-center">No se encontraron especialidades.</td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            {{ $especialidades->onEachSide(1)->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
+
                 @endif
             </div>
         </div>

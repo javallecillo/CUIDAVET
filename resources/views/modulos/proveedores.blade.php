@@ -29,12 +29,12 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
-                                <th>Tipo de Proveedor</th>
-                                <th>Cuenta de Banco</th>
-                                <th>Banco</th>
-                                <th>Acciones</th>
+                                <th style="color: white; background-color: #0d98ba;">Nombre</th>
+                                <th style="color: white; background-color: #0d98ba;">Teléfono</th>
+                                <th style="color: white; background-color: #0d98ba;">Tipo de Proveedor</th>
+                                <th style="color: white; background-color: #0d98ba;">Cuenta de Banco</th>
+                                <th style="color: white; background-color: #0d98ba;">Banco</th>
+                                <th style="color: white; background-color: #0d98ba;">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
