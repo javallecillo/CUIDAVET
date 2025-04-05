@@ -17,41 +17,52 @@
                     </div>
                 @endif
                 
+                <div class="section">
+                    <div class="mb-2 row">
+                        <!-- Formulario para buscar mascotas -->
+                        <div class="col-md-6">
+                            <h4>Buscar Mascota</h4>
+                            <form action="{{ route('mascotas.index') }}" method="GET" class="d-flex align-items-center gap-2">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control form-control-sm" name="search" placeholder="Buscar por nombre o dueño..." value="{{ request('search') }}">
+                                    <br>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th style="color: white; background-color: #0d98ba;">Nombre</th>
-                            <th style="color: white; background-color: #0d98ba;">Dueño</th>
-                            <th style="color: white; background-color: #0d98ba;">DNI Dueño</th>
                             <th style="color: white; background-color: #0d98ba;">Especie</th>
                             <th style="color: white; background-color: #0d98ba;">Raza</th>
-                            <th style="color: white; background-color: #0d98ba;">Sexo</th>
+                            <th style="color: white; background-color: #0d98ba;">Dueño</th>
                             <th style="color: white; background-color: #0d98ba;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($mascotas as $mascota)
-                        <tr>
-                            <td>{{ $mascota->nombre }}</td>
-                            <td>{{ $mascota->cliente->nombre }} {{ $mascota->cliente->apellido }}</td>
-                            <td>{{ $mascota->cliente->dni }}</td>
-                            <td>{{ $mascota->especie }}</td>
-                            <td>{{ $mascota->raza ?? 'No especificada' }}</td>
-                            <td>{{ $mascota->sexo }}</td>
-                            <td>
-                                <a href="{{ route('mascotas.edit', $mascota->id) }}" class="btn btn-warning">Editar</a>
-                                <form action="{{ route('mascotas.destroy', $mascota->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar esta mascota?')">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="8" class="text-center">No hay mascotas registradas</td>
-                        </tr>
-                        @endforelse
+                        @foreach($mascotas as $mascota)
+                            <tr>
+                                <td>{{ $mascota->nombre }}</td>
+                                <td>{{ $mascota->especie }}</td>
+                                <td>{{ $mascota->raza }}</td>
+                                <td>{{ $mascota->cliente->nombre }}</td>
+                                <td>
+                                    <a href="{{ route('mascotas.edit', $mascota->id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ route('mascotas.destroy', $mascota->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -19,14 +19,12 @@ class Cliente extends Model
         'apellido',
         'genero',
         'dni',
-        'contrasenia',
         'telefono',
         'tel_alternativo',
         'correo',
         'direccion',
         'id_nacionalidad',
         'id_moneda',
-        'id_rol',
         'estado',
     ];
 

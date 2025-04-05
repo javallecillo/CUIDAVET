@@ -31,10 +31,6 @@
                         <input type="text" name="dni" class="form-control" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="contrasenia">Contraseña</label>
-                        <input type="password" name="contrasenia" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-3">
                         <label for="telefono">Teléfono</label>
                         <input type="text" name="telefono" class="form-control" required>
                     </div>
@@ -67,14 +63,6 @@
                             @endforeach
                         </select>
                     </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label for="id_rol">Rol</label>
-                        <select name="id_rol" class="form-control" required>
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuario</option>
-                        </select>
-                    </div>
 
                     <div class="form-group col-md-3">
                         <label for="estado">Estado</label>
@@ -83,11 +71,11 @@
                             <option value="Inactivo">Inactivo</option>
                         </select>
                     </div>
-                    <div class="col-md-12 text-right">
-                        <a href="{{ route('Clientes') }}" class="btn btn-warning">
-                            <i class="fa fa-arrow-left"></i> Regresar
-                        </a>
+
+                    <!-- Botones -->
+                    <div class="form-group">
                         <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="{{ route('clientes.index') }}" class="btn btn-default">Cancelar</a>
                     </div>
                 </form>
             </div>

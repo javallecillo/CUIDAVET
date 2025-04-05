@@ -56,6 +56,8 @@ Route::get('/RegistrarEmpleado', [EmpleadosController::class, 'create']);
 Route::get('/clientes/buscar-por-dni', [ClientesController::class, 'buscarPorDni'])->name('clientes.buscarPorDni'); // Ruta personalizada
 Route::resource('clientes', ClientesController::class); // Rutas de recursos
 Route::get('/Clientes', [ClientesController::class, 'index'])->name('Clientes');
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
+Route::put('/clientes/{cliente}', [ClientesController::class, 'update'])->name('clientes.update');
 
 // Rutas para mascotas
 Route::resource('mascotas', MascotasController::class);

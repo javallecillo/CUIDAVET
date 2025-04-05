@@ -11,9 +11,19 @@ use Illuminate\Support\Facades\Log;
 
 class ClientesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
+        $query = Cliente::query();
+    
+        // Filtrar por nombre o apellido si se proporciona un término de búsqueda
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('nombre', 'like', "%$search%")
+                  ->orWhere('apellido', 'like', "%$search%");
+        }
+    
+        $clientes = $query->get();
+    
         return view('modulos.clientes', compact('clientes'));
     }
 
@@ -26,28 +36,22 @@ class ClientesController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'genero' => 'required|string|max:255',
-            'dni' => 'required|string|max:255|unique:clientes',
-            'contrasenia' => 'required|string|max:255',
-            'telefono' => 'required|string|max:255',
-            'tel_alternativo' => 'nullable|string|max:255',
-            'correo' => 'required|string|email|max:255|unique:clientes',
+            'genero' => 'required|string',
+            'dni' => 'required|string|max:20|unique:clientes,dni',
+            'telefono' => 'required|string|max:15',
+            'correo' => 'required|email|unique:clientes,correo',
             'direccion' => 'required|string|max:255',
-            'id_nacionalidad' => 'required|integer',
-            'id_moneda' => 'required|integer',
-            'id_rol' => 'required|integer',
-            'estado' => 'required|string|max:255',
+            'id_nacionalidad' => 'required|exists:nacionalidades,id',
+            'id_moneda' => 'required|exists:monedas,id',
+            'estado' => 'required|in:Activo,Inactivo',
         ]);
 
-        try {
-            Cliente::create($validatedData);
-            return redirect()->route('Clientes')->with('success', 'Cliente creado correctamente.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error al guardar el cliente: ' . $e->getMessage());
-        }
+        Cliente::create($request->all());
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente creado correctamente.');
     }
 
     public function edit($id)
@@ -58,27 +62,24 @@ class ClientesController extends Controller
         return view('modulos.edit_cliente', compact('cliente', 'monedas', 'nacionalidades'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'genero' => 'required|string|max:255',
-            'dni' => 'required|string|max:255|unique:clientes,dni,' . $id,
-            'contrasenia' => 'required|string|max:255',
-            'telefono' => 'required|string|max:255',
-            'tel_alternativo' => 'nullable|string|max:255',
-            'correo' => 'required|string|email|max:255|unique:clientes,correo,' . $id,
+            'genero' => 'required|string',
+            'dni' => 'required|string|max:20|unique:clientes,dni,' . $cliente->id,
+            'telefono' => 'required|string|max:15',
+            'correo' => 'required|email|unique:clientes,correo,' . $cliente->id,
             'direccion' => 'required|string|max:255',
-            'id_nacionalidad' => 'required|integer',
-            'id_moneda' => 'required|integer',
-            'id_rol' => 'required|integer',
-            'estado' => 'required|string|max:255',
+            'id_nacionalidad' => 'required|exists:nacionalidades,id',
+            'id_moneda' => 'required|exists:monedas,id',
+            'estado' => 'required|in:Activo,Inactivo',
         ]);
 
-        $cliente = Cliente::findOrFail($id);
-        $cliente->update($validatedData);
-        return redirect()->route('Clientes')->with('success', 'Cliente actualizado correctamente.');
+        $cliente->update($request->all());
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
 
     public function destroy($id)
