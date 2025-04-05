@@ -32,7 +32,6 @@
                             <button type="submit" class="btn btn-primary">Filtrar</button>
                         </div>
 
-                        
                     </form>
 
                 </div>
@@ -67,7 +66,7 @@
                     @forelse ($compras as $compra)
                         <tr>
                             <td>{{ $compra->proveedor->nombre }}</td>
-                            <td>{{ $compra->fecha }}</td>
+                            <td>{{ \Carbon\Carbon::parse($compra->fecha)->format('d-m-Y') }}</td>
                             <td>{{ $compra->total }}</td>
                             <td>{{ $compra->estado }}</td>
                             <td>{{ $compra->empleado->nombre ?? 'N/A' }}</td> <!-- Mostrar el nombre del empleado -->
@@ -83,7 +82,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">No hay veterinarios registrados</td>
+                            <td colspan="6" class="text-center">No hay compras registrados</td>
                         </tr>
                     @endforelse
                 </tbody>

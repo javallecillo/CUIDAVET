@@ -100,7 +100,8 @@
                                             <button type="button" class="btn btn-primary btn-sm agregar-producto" 
                                                     data-id="{{ $producto->id }}" 
                                                     data-nombre="{{ $producto->nombre }}"
-                                                    data-precio="{{ $producto->precio_venta }}"> <!-- Agregar precio -->
+                                                    data-precio="{{ $producto->precio_venta }}"
+                                                    data-existencias="{{ $producto->cantidad }}"> <!-- Agregar existencias -->
                                                 Agregar
                                             </button>
                                         </td>
@@ -147,12 +148,16 @@
                     const id = this.dataset.id;
                     const nombre = this.dataset.nombre;
                     const precio = parseFloat(this.dataset.precio) || 0; // Obtener precio
+                    const existencias = parseInt(this.dataset.existencias) || 0; // Obtener existencias
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${nombre}<input type="hidden" name="productos[${id}][id]" value="${id}"></td>
-                        <td><input type="number" name="productos[${id}][cantidad]" class="form-control cantidad" min="1" value="1"></td>
-                        <td><input type="number" name="productos[${id}][precio]" class="form-control precio" step="0.01" value="${precio}" readonly></td> <!-- Bloquear precio -->
+                        <td>
+                            <input type="number" name="productos[${id}][cantidad]" class="form-control cantidad" min="1" max="${existencias}" value="1">
+                            <small>Existencias: ${existencias}</small>
+                        </td>
+                        <td><input type="number" name="productos[${id}][precio]" class="form-control precio" step="0.01" value="${precio}" readonly></td>
                         <td class="subtotal">${precio.toFixed(2)}</td>
                         <td><button type="button" class="btn btn-danger btn-sm eliminar-producto">Eliminar</button></td>
                     `;
@@ -165,11 +170,18 @@
                 });
             });
 
-            // Actualizar total al cambiar cantidad o precio
+            // Validar cantidad al cambiar
             productosTable.addEventListener('input', function (e) {
-                if (e.target.classList.contains('cantidad') || e.target.classList.contains('precio')) {
+                if (e.target.classList.contains('cantidad')) {
                     const row = e.target.closest('tr');
-                    const cantidad = parseFloat(row.querySelector('.cantidad').value) || 0;
+                    const cantidad = parseInt(e.target.value) || 0;
+                    const max = parseInt(e.target.getAttribute('max')) || 0;
+
+                    if (cantidad > max) {
+                        alert('La cantidad no puede exceder las existencias disponibles.');
+                        e.target.value = max; // Restablecer al valor máximo permitido
+                    }
+
                     const precio = parseFloat(row.querySelector('.precio').value) || 0;
                     const subtotal = cantidad * precio;
 
@@ -198,14 +210,14 @@
             }
 
             // Validar formulario antes de enviar
-            function validarFormulario() {
+            window.validarFormulario = function () {
                 const total = parseFloat(document.querySelector('#total').value) || 0;
                 if (total <= 0) {
                     alert('El total debe ser mayor a 0.');
                     return false;
                 }
                 return true;
-            }
+            };
 
             // Establecer la fecha actual en el campo de fecha
             const fechaInput = document.getElementById('fecha');

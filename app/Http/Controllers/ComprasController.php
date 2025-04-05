@@ -9,9 +9,21 @@ use App\Models\Producto;// Agregar esta línea para importar Auth
 
 class ComprasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $compras = Compra::with('proveedor', 'empleado')->get(); // Cargar las relaciones
+        $query = Compra::with('proveedor', 'empleado'); // Cargar las relaciones
+    
+        // Filtrar por rango de fechas si se proporcionan
+        if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
+            $query->whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin]);
+        } elseif ($request->filled('fecha_inicio')) {
+            $query->where('fecha', '>=', $request->fecha_inicio);
+        } elseif ($request->filled('fecha_fin')) {
+            $query->where('fecha', '<=', $request->fecha_fin);
+        }
+    
+        $compras = $query->get();
+    
         return view('modulos.compras', compact('compras'));
     }
 
