@@ -32,6 +32,10 @@
                         <input type="text" name="dni" class="form-control" value="{{ $cliente->dni }}" required>
                     </div>
                     <div class="form-group col-md-3">
+                        <label for="contrasenia">Contraseña</label>
+                        <input type="password" name="contrasenia" class="form-control" value="{{ $cliente->contrasenia }}" required>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="telefono">Teléfono</label>
                         <input type="text" name="telefono" class="form-control" value="{{ $cliente->telefono }}" required>
                     </div>
@@ -51,9 +55,7 @@
                         <label for="id_nacionalidad">Nacionalidad</label>
                         <select name="id_nacionalidad" class="form-control" required>
                             @foreach($nacionalidades as $nacionalidad)
-                                <option value="{{ $nacionalidad->id }}" {{ old('id_nacionalidad', $cliente->id_nacionalidad ?? '') == $nacionalidad->id ? 'selected' : '' }}>
-                                    {{ $nacionalidad->nombre }}
-                                </option>
+                                <option value="{{ $nacionalidad->id }}">{{ $nacionalidad->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -61,9 +63,7 @@
                         <label for="id_moneda">Moneda</label>
                         <select name="id_moneda" class="form-control" required>
                             @foreach($monedas as $moneda)
-                                <option value="{{ $moneda->id }}" {{ old('id_moneda', $cliente->id_moneda ?? '') == $moneda->id ? 'selected' : '' }}>
-                                    {{ $moneda->nombre }} ({{ $moneda->simbolo }})
-                                </option>
+                                <option value="{{ $moneda->id }}">{{ $moneda->nombre }} ({{ $moneda->simbolo }})</option>
                             @endforeach
                         </select>
                     </div>

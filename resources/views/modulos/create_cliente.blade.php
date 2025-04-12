@@ -63,6 +63,7 @@
                             @endforeach
                         </select>
                     </div>
+                    
 
                     <div class="form-group col-md-3">
                         <label for="estado">Estado</label>
@@ -71,11 +72,11 @@
                             <option value="Inactivo">Inactivo</option>
                         </select>
                     </div>
-
-                    <!-- Botones -->
-                    <div class="form-group">
+                    <div class="col-md-12 text-right">
+                        <a href="{{ route('Clientes') }}" class="btn btn-warning">
+                            <i class="fa fa-arrow-left"></i> Regresar
+                        </a>
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a href="{{ route('clientes.index') }}" class="btn btn-default">Cancelar</a>
                     </div>
                 </form>
             </div>

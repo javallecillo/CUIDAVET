@@ -30,7 +30,6 @@
                                 <td>{{ $cita->hora }}</td>
                                 <td>{{ $cita->estado }}</td>
                                 <td>
-                                    <a href="{{ route('citas.edit', $cita->id) }}" class="btn btn-warning">Editar</a>
                                     <form action="{{ route('citas.destroy', $cita->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')

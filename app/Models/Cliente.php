@@ -19,12 +19,14 @@ class Cliente extends Model
         'apellido',
         'genero',
         'dni',
+        'contrasenia',
         'telefono',
         'tel_alternativo',
         'correo',
         'direccion',
         'id_nacionalidad',
         'id_moneda',
+        'id_rol',
         'estado',
     ];
 
@@ -38,9 +40,4 @@ class Cliente extends Model
         'id_moneda' => 'integer',
         'id_rol' => 'integer',
     ];
-
-    public function mascotas()
-    {
-        return $this->hasMany(Mascota::class, 'cliente_id'); // Asegúrate de que 'cliente_id' sea la clave foránea en la tabla 'mascotas'
-    }
 }

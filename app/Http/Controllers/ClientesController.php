@@ -7,23 +7,12 @@ use App\Models\Cliente;
 use App\Models\Moneda;
 use App\Models\Nacionalidad;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ClientesController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = Cliente::query();
-    
-        // Filtrar por nombre o apellido si se proporciona un término de búsqueda
-        if ($request->filled('search')) {
-            $search = $request->input('search');
-            $query->where('nombre', 'like', "%$search%")
-                  ->orWhere('apellido', 'like', "%$search%");
-        }
-    
-        $clientes = $query->get();
-    
+        $clientes = Cliente::all();
         return view('modulos.clientes', compact('clientes'));
     }
 
@@ -36,22 +25,28 @@ class ClientesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'genero' => 'required|string',
-            'dni' => 'required|string|max:20|unique:clientes,dni',
-            'telefono' => 'required|string|max:15',
-            'correo' => 'required|email|unique:clientes,correo',
+            'genero' => 'required|string|max:255',
+            'dni' => 'required|string|max:255|unique:clientes',
+            'contrasenia' => 'string|max:255',
+            'telefono' => 'required|string|max:255',
+            'tel_alternativo' => 'nullable|string|max:255',
+            'correo' => 'required|string|email|max:255|unique:clientes',
             'direccion' => 'required|string|max:255',
-            'id_nacionalidad' => 'required|exists:nacionalidades,id',
-            'id_moneda' => 'required|exists:monedas,id',
-            'estado' => 'required|in:Activo,Inactivo',
+            'id_nacionalidad' => 'required|integer',
+            'id_moneda' => 'required|integer',
+            'id_rol' => 'integer',
+            'estado' => 'required|string|max:255',
         ]);
 
-        Cliente::create($request->all());
-
-        return redirect()->route('clientes.index')->with('success', 'Cliente creado correctamente.');
+        try {
+            Cliente::create($validatedData);
+            return redirect()->route('Clientes')->with('success', 'Cliente creado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al guardar el cliente: ' . $e->getMessage());
+        }
     }
 
     public function edit($id)
@@ -62,24 +57,27 @@ class ClientesController extends Controller
         return view('modulos.edit_cliente', compact('cliente', 'monedas', 'nacionalidades'));
     }
 
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'genero' => 'required|string',
-            'dni' => 'required|string|max:20|unique:clientes,dni,' . $cliente->id,
-            'telefono' => 'required|string|max:15',
-            'correo' => 'required|email|unique:clientes,correo,' . $cliente->id,
+            'genero' => 'required|string|max:255',
+            'dni' => 'required|string|max:255|unique:clientes,dni,' . $id,
+            'contrasenia' => 'string|max:255',
+            'telefono' => 'required|string|max:255',
+            'tel_alternativo' => 'nullable|string|max:255',
+            'correo' => 'required|string|email|max:255|unique:clientes,correo,' . $id,
             'direccion' => 'required|string|max:255',
-            'id_nacionalidad' => 'required|exists:nacionalidades,id',
-            'id_moneda' => 'required|exists:monedas,id',
-            'estado' => 'required|in:Activo,Inactivo',
+            'id_nacionalidad' => 'required|integer',
+            'id_moneda' => 'required|integer',
+            'id_rol' => 'integer',
+            'estado' => 'required|string|max:255',
         ]);
 
-        $cliente->update($request->all());
-
-        return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update($validatedData);
+        return redirect()->route('Clientes')->with('success', 'Cliente actualizado correctamente.');
     }
 
     public function destroy($id)
@@ -110,15 +108,19 @@ class ClientesController extends Controller
      */
     public function buscarPorDni(Request $request)
     {
-        Log::info('Método buscarPorDni llamado con DNI: ' . $request->input('dni'));
-
         $dni = $request->input('dni');
         $cliente = Cliente::where('dni', $dni)->first();
-
+        
         if ($cliente) {
             return response()->json([
                 'success' => true,
-                'cliente' => $cliente
+                'cliente' => [
+                    'id' => $cliente->id,
+                    'nombre' => $cliente->nombre,
+                    'apellido' => $cliente->apellido,
+                    'nombre_completo' => $cliente->nombre . ' ' . $cliente->apellido,
+                    'dni' => $cliente->dni
+                ]
             ]);
         } else {
             return response()->json([
@@ -126,5 +128,25 @@ class ClientesController extends Controller
                 'message' => 'Cliente no encontrado'
             ]);
         }
+    }
+
+    public function getMascotas($clienteId)
+    {
+        $cliente = Cliente::findOrFail($clienteId);
+        return response()->json($cliente->mascotas);
+    }
+
+    public function getClienteByDni($dni)
+    {
+        $cliente = Cliente::where('dni', $dni)->first();
+
+        if ($cliente) {
+            return response()->json([
+                'cliente' => $cliente,
+                'mascotas' => $cliente->mascotas
+            ]);
+        }
+
+        return response()->json(['message' => 'Cliente no encontrado'], 404);
     }
 }
